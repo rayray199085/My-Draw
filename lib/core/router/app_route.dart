@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_draw/core/router/dialog_pages.dart';
 import 'package:my_draw/core/router/router_path.dart';
-import 'package:my_draw/features/screens/draw/draw_screen.dart';
+import 'package:my_draw/features/screens/draw/presentation/draw_screen.dart';
 import 'package:my_draw/features/screens/ticket/presentation/ticket_screen.dart';
 
 part 'app_route.g.dart';

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/core/router/app_route.dart';
 import 'package:my_draw/core/theme/gaps.dart';
 import 'package:my_draw/features/screens/ticket/presentation/cubit/ticket_cubit.dart';
-import 'package:my_draw/features/screens/ticket/presentation/ticket_screen_constants.dart';
 import 'package:my_draw/features/screens/ticket/presentation/widgets/number_selection_board.dart';
 
 import '../../../../generated/l10n.dart';
@@ -44,10 +43,11 @@ class TicketBody extends StatelessWidget {
                 NumberSelectionBoard(selectedNumbers: selectedNumbers),
                 const SizedBox(height: Gaps.spacing16),
                 ElevatedButton(
-                    onPressed: selectedNumbers.length ==
-                            TicketScreenConstants.maxSelectedNumber
-                        ? () => DrawRoute().push(context)
-                        : null,
+                    onPressed: () => DrawRoute().push(context),
+                    // onPressed: selectedNumbers.length ==
+                    //         TicketScreenConstants.maxSelectedNumber
+                    //     ? () => DrawRoute().push(context)
+                    //     : null,
                     child: Text(
                       S.of(context).start,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(

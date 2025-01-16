@@ -9,4 +9,5 @@ class Gaps {
   static const double spacing12 = 12;
   static const double spacing14 = 14;
   static const double spacing16 = 16;
+  static const double spacing30 = 30;
 }

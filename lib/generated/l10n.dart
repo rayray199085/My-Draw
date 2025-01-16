@@ -60,11 +60,31 @@ class S {
     );
   }
 
+  /// `Heads`
+  String get heads {
+    return Intl.message(
+      'Heads',
+      name: 'heads',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Start`
   String get start {
     return Intl.message(
       'Start',
       name: 'start',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tails`
+  String get tails {
+    return Intl.message(
+      'Tails',
+      name: 'tails',
       desc: '',
       args: [],
     );
