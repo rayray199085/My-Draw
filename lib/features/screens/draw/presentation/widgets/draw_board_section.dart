@@ -58,7 +58,7 @@ class DrawBoardSection extends StatelessWidget {
               child: GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: DrawScreenConstants.boardCrossAxisCount,
                   crossAxisSpacing: Gaps.spacing4,
                   mainAxisSpacing: Gaps.spacing4,
@@ -71,7 +71,7 @@ class DrawBoardSection extends StatelessWidget {
                       startingIndex + index + 1; // number = index + 1
                   return Container(
                     decoration: BoxDecoration(
-                        color: Colors.grey,
+                        color: Colors.black26,
                         borderRadius:
                             BorderRadius.circular(RadiusValues.circular4)),
                     alignment: Alignment.center,

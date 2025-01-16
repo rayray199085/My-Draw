@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$TicketState {
-  List<int> get selectedNumbers => throw _privateConstructorUsedError;
+  Ticket get ticket => throw _privateConstructorUsedError;
 
   /// Create a copy of TicketState
   /// with the given fields replaced by the non-null parameter values.
@@ -31,7 +31,9 @@ abstract class $TicketStateCopyWith<$Res> {
           TicketState value, $Res Function(TicketState) then) =
       _$TicketStateCopyWithImpl<$Res, TicketState>;
   @useResult
-  $Res call({List<int> selectedNumbers});
+  $Res call({Ticket ticket});
+
+  $TicketCopyWith<$Res> get ticket;
 }
 
 /// @nodoc
@@ -49,14 +51,24 @@ class _$TicketStateCopyWithImpl<$Res, $Val extends TicketState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedNumbers = null,
+    Object? ticket = null,
   }) {
     return _then(_value.copyWith(
-      selectedNumbers: null == selectedNumbers
-          ? _value.selectedNumbers
-          : selectedNumbers // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+      ticket: null == ticket
+          ? _value.ticket
+          : ticket // ignore: cast_nullable_to_non_nullable
+              as Ticket,
     ) as $Val);
+  }
+
+  /// Create a copy of TicketState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $TicketCopyWith<$Res> get ticket {
+    return $TicketCopyWith<$Res>(_value.ticket, (value) {
+      return _then(_value.copyWith(ticket: value) as $Val);
+    });
   }
 }
 
@@ -68,7 +80,10 @@ abstract class _$$TicketStateImplCopyWith<$Res>
       __$$TicketStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<int> selectedNumbers});
+  $Res call({Ticket ticket});
+
+  @override
+  $TicketCopyWith<$Res> get ticket;
 }
 
 /// @nodoc
@@ -84,13 +99,13 @@ class __$$TicketStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? selectedNumbers = null,
+    Object? ticket = null,
   }) {
     return _then(_$TicketStateImpl(
-      selectedNumbers: null == selectedNumbers
-          ? _value._selectedNumbers
-          : selectedNumbers // ignore: cast_nullable_to_non_nullable
-              as List<int>,
+      ticket: null == ticket
+          ? _value.ticket
+          : ticket // ignore: cast_nullable_to_non_nullable
+              as Ticket,
     ));
   }
 }
@@ -98,20 +113,14 @@ class __$$TicketStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TicketStateImpl implements _TicketState {
-  const _$TicketStateImpl({required final List<int> selectedNumbers})
-      : _selectedNumbers = selectedNumbers;
+  const _$TicketStateImpl({required this.ticket});
 
-  final List<int> _selectedNumbers;
   @override
-  List<int> get selectedNumbers {
-    if (_selectedNumbers is EqualUnmodifiableListView) return _selectedNumbers;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_selectedNumbers);
-  }
+  final Ticket ticket;
 
   @override
   String toString() {
-    return 'TicketState(selectedNumbers: $selectedNumbers)';
+    return 'TicketState(ticket: $ticket)';
   }
 
   @override
@@ -119,13 +128,11 @@ class _$TicketStateImpl implements _TicketState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TicketStateImpl &&
-            const DeepCollectionEquality()
-                .equals(other._selectedNumbers, _selectedNumbers));
+            (identical(other.ticket, ticket) || other.ticket == ticket));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_selectedNumbers));
+  int get hashCode => Object.hash(runtimeType, ticket);
 
   /// Create a copy of TicketState
   /// with the given fields replaced by the non-null parameter values.
@@ -137,11 +144,11 @@ class _$TicketStateImpl implements _TicketState {
 }
 
 abstract class _TicketState implements TicketState {
-  const factory _TicketState({required final List<int> selectedNumbers}) =
+  const factory _TicketState({required final Ticket ticket}) =
       _$TicketStateImpl;
 
   @override
-  List<int> get selectedNumbers;
+  Ticket get ticket;
 
   /// Create a copy of TicketState
   /// with the given fields replaced by the non-null parameter values.

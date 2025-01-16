@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:my_draw/core/router/app_route.dart';
 import 'package:my_draw/core/theme/gaps.dart';
+import 'package:my_draw/features/screens/ticket/domain/entities/ticket.dart';
 import 'package:my_draw/features/screens/ticket/presentation/cubit/ticket_cubit.dart';
 import 'package:my_draw/features/screens/ticket/presentation/widgets/number_selection_board.dart';
 
@@ -18,7 +20,7 @@ class TicketScreen extends StatelessWidget {
       ),
       body: BlocProvider(
         create: (context) => TicketCubit(),
-        child: TicketBody(),
+        child: const TicketBody(),
       ),
     );
   }
@@ -30,9 +32,9 @@ class TicketBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<TicketCubit, TicketState, List<int>>(
-      selector: (state) => state.selectedNumbers,
-      builder: (context, selectedNumbers) {
+    return BlocSelector<TicketCubit, TicketState, Ticket>(
+      selector: (state) => state.ticket,
+      builder: (context, ticket) {
         return SafeArea(
             child: SingleChildScrollView(
           child: Padding(
@@ -40,10 +42,11 @@ class TicketBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                NumberSelectionBoard(selectedNumbers: selectedNumbers),
+                NumberSelectionBoard(selectedNumbers: ticket.numbers),
                 const SizedBox(height: Gaps.spacing16),
                 ElevatedButton(
-                    onPressed: () => DrawRoute().push(context),
+                    onPressed: () =>
+                        context.push(const DrawRoute().location, extra: ticket),
                     // onPressed: selectedNumbers.length ==
                     //         TicketScreenConstants.maxSelectedNumber
                     //     ? () => DrawRoute().push(context)

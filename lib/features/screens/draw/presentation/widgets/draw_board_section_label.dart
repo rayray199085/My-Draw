@@ -18,7 +18,7 @@ class DrawBoardSectionLabel extends StatelessWidget {
         borderRadius: BorderRadius.circular(RadiusValues.circular4),
         color: backgroundColor ?? Theme.of(context).colorScheme.primary,
       ),
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: Gaps.spacing4,
         vertical: Gaps.spacing2,
       ),

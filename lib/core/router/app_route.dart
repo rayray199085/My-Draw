@@ -5,6 +5,8 @@ import 'package:my_draw/core/router/router_path.dart';
 import 'package:my_draw/features/screens/draw/presentation/draw_screen.dart';
 import 'package:my_draw/features/screens/ticket/presentation/ticket_screen.dart';
 
+import '../../features/screens/ticket/domain/entities/ticket.dart';
+
 part 'app_route.g.dart';
 
 @TypedGoRoute<TicketRoute>(path: RouterPath.ticketPath)
@@ -22,6 +24,9 @@ class DrawRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) {
-    return FullScreenModalPage(child: DrawScreen());
+    return FullScreenModalPage(
+        child: DrawScreen(
+      ticket: state.extra as Ticket,
+    ));
   }
 }

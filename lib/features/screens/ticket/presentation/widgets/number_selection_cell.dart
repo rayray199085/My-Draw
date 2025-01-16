@@ -22,7 +22,7 @@ class NumberSelectionCell extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected ? Colors.red : Colors.black45,
           borderRadius:
-              BorderRadius.all(Radius.circular(RadiusValues.circular4)),
+              const BorderRadius.all(Radius.circular(RadiusValues.circular4)),
         ),
         alignment: Alignment.center,
         child: Text(

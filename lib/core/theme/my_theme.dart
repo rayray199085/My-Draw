@@ -6,7 +6,7 @@ class MyTheme {
     fontFamily: 'Roboto',
     colorScheme: const ColorScheme.light(
       primary: Colors.blueAccent,
-      secondary: Colors.black38,
+      secondary: Colors.black87,
       onSecondary: Colors.white,
       tertiary: Colors.red,
     ),
