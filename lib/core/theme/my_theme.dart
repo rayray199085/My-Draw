@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_draw/core/theme/radius_values.dart';
 
 class MyTheme {
   static ThemeData lightTheme = ThemeData(
@@ -10,7 +11,7 @@ class MyTheme {
     ),
     scaffoldBackgroundColor: Colors.white,
     useMaterial3: true,
-    splashColor: Colors.transparent,
+    // splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
       centerTitle: true,
@@ -29,15 +30,16 @@ class MyTheme {
             if (states.contains(WidgetState.pressed)) {
               return Colors.blue;
             } else if (states.contains(WidgetState.disabled)) {
-              return Colors.white38;
+              return Colors.black26;
             }
             return Colors.blueAccent;
           }),
           padding: WidgetStateProperty.all<EdgeInsets>(
-              const EdgeInsets.symmetric(vertical: 20.0, horizontal: 40.0)),
+              const EdgeInsets.symmetric(vertical: 16.0, horizontal: 40.0)),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0), // Corner radius here
+              borderRadius: BorderRadius.circular(
+                  RadiusValues.circular10), // Corner radius here
             ),
           ),
           textStyle: WidgetStateProperty.all<TextStyle>(const TextStyle(
