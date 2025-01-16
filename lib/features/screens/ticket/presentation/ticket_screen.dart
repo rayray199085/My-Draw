@@ -5,8 +5,8 @@ import 'package:my_draw/core/router/app_route.dart';
 import 'package:my_draw/core/theme/gaps.dart';
 import 'package:my_draw/features/screens/ticket/presentation/cubit/ticket_cubit.dart';
 import 'package:my_draw/features/screens/ticket/presentation/ticket_screen_constants.dart';
-import 'package:my_draw/features/screens/ticket/presentation/widgets/icon_text_button.dart';
 import 'package:my_draw/features/screens/ticket/presentation/widgets/number_selection_board.dart';
+import 'package:my_draw/features/screens/ticket/presentation/widgets/ticket_header.dart';
 
 import '../../../../generated/l10n.dart';
 
@@ -44,24 +44,7 @@ class TicketBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: Gaps.spacing16,
               children: [
-                Row(
-                  spacing: Gaps.spacing8,
-                  children: [
-                    IconTextButton(
-                      icon: Icons.clear,
-                      label: S.of(context).clear,
-                      onTap: () =>
-                          context.read<TicketCubit>().clearSelectedNumbers(),
-                    ),
-                    IconTextButton(
-                      icon: Icons.vibration,
-                      label: S.of(context).auto,
-                      onTap: () => context
-                          .read<TicketCubit>()
-                          .autoGenerateTicketNumbers(),
-                    )
-                  ],
-                ),
+                const TicketHeader(),
                 NumberSelectionBoard(selectedNumbers: selectedNumbers),
                 ElevatedButton(
                     onPressed: selectedNumbers.length ==

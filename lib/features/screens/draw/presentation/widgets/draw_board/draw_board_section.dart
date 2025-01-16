@@ -1,26 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_draw/features/screens/draw/presentation/utils/draw_board_section_color.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/draw_board_section_label.dart';
 
 import '../../../../../../core/theme/gaps.dart';
 import '../../../../../../generated/l10n.dart';
 import '../../draw_screen_constants.dart';
+import '../../enums/draw_board_section_type.dart';
 import 'draw_board_section_cell.dart';
-
-enum DrawBordSectionType {
-  heads,
-  tails,
-}
-
-extension DrawBordSectionTypeExtension on DrawBordSectionType {
-  String get label {
-    switch (this) {
-      case DrawBordSectionType.heads:
-        return S.current.heads;
-      case DrawBordSectionType.tails:
-        return S.current.tails;
-    }
-  }
-}
 
 class DrawBoardSection extends StatelessWidget {
   const DrawBoardSection({
@@ -33,7 +19,7 @@ class DrawBoardSection extends StatelessWidget {
 
   final int startingIndex;
   final int itemsCount;
-  final DrawBordSectionType sectionType;
+  final DrawBoardSectionType sectionType;
   final double height;
 
   @override
@@ -45,7 +31,8 @@ class DrawBoardSection extends StatelessWidget {
             width: DrawScreenConstants.drawBoardLabelWidth,
             child: DrawBoardSectionLabel(
               text: _sectionLabel,
-              backgroundColor: _getSectionLabelColor(context),
+              backgroundColor: getDrawBoardSectionPrimaryColor(
+                  context: context, type: sectionType),
             )),
         const SizedBox(width: Gaps.spacing4),
         Expanded(
@@ -72,19 +59,10 @@ class DrawBoardSection extends StatelessWidget {
 
   String get _sectionLabel {
     switch (sectionType) {
-      case DrawBordSectionType.heads:
+      case DrawBoardSectionType.heads:
         return S.current.heads;
-      case DrawBordSectionType.tails:
+      case DrawBoardSectionType.tails:
         return S.current.tails;
-    }
-  }
-
-  Color _getSectionLabelColor(BuildContext context) {
-    switch (sectionType) {
-      case DrawBordSectionType.heads:
-        return Theme.of(context).colorScheme.tertiary;
-      case DrawBordSectionType.tails:
-        return Theme.of(context).colorScheme.primary;
     }
   }
 }

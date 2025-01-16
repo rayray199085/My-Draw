@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:my_draw/features/screens/draw/presentation/enums/draw_board_section_type.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/theme/gaps.dart';
 import '../../draw_screen_constants.dart';
+import 'draw_board_header.dart';
 import 'draw_board_section.dart';
 
 class DrawBoard extends StatelessWidget {
@@ -16,29 +18,41 @@ class DrawBoard extends StatelessWidget {
         final gridSectionHeight = _calculateGridSectionHeight(
             maxWidth: constraints.maxWidth, itemsCount: sectionItemCount);
         final gridViewHeight = gridSectionHeight * 2 + Gaps.spacing16;
-        return SizedBox(
-          height: gridViewHeight,
-          child: Stack(
-            children: [
-              Column(
+        return Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(
+                left: DrawScreenConstants.drawBoardLabelWidth + Gaps.spacing4,
+                bottom: Gaps.spacing4,
+              ),
+              child: DrawBoardHeader(labelWidth: gridSectionHeight),
+            ),
+            SizedBox(
+              height: gridViewHeight,
+              child: Stack(
                 children: [
-                  DrawBoardSection(
-                    startingIndex: 0,
-                    itemsCount: sectionItemCount,
-                    sectionType: DrawBordSectionType.heads,
-                    height: gridSectionHeight,
+                  Column(
+                    children: [
+                      DrawBoardSection(
+                        startingIndex: 0,
+                        itemsCount: sectionItemCount,
+                        sectionType: DrawBoardSectionType.heads,
+                        height: gridSectionHeight,
+                      ),
+                      const SizedBox(height: Gaps.spacing16),
+                      DrawBoardSection(
+                        startingIndex: sectionItemCount,
+                        itemsCount: sectionItemCount,
+                        sectionType: DrawBoardSectionType.tails,
+                        height: gridSectionHeight,
+                      )
+                    ],
                   ),
-                  const SizedBox(height: Gaps.spacing16),
-                  DrawBoardSection(
-                    startingIndex: sectionItemCount,
-                    itemsCount: sectionItemCount,
-                    sectionType: DrawBordSectionType.tails,
-                    height: gridSectionHeight,
-                  )
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
