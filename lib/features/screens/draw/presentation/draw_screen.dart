@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/core/theme/gaps.dart';
 import 'package:my_draw/features/screens/draw/domain/entities/ticket_number.dart';
 import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
+import 'package:my_draw/features/screens/draw/presentation/widgets/ball_section.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section.dart';
 import 'package:my_draw/features/screens/ticket/domain/entities/ticket.dart';
@@ -24,7 +25,12 @@ class DrawScreen extends StatelessWidget {
         title: Text(S.of(context).draw),
       ),
       body: BlocProvider(
-        create: (context) => DrawCubit()..loadTicketNumbers(ticket.numbers),
+        create: (context) {
+          final cubit = DrawCubit();
+          WidgetsBinding.instance.addPostFrameCallback(
+              (_) => cubit.loadTicketNumbers(ticket.numbers));
+          return cubit;
+        },
         child: const DrawBody(),
       ),
     );
@@ -39,29 +45,51 @@ class DrawBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(Gaps.spacing16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            BlocSelector<DrawCubit, DrawState, List<TicketNumber>?>(
-              selector: (state) => state.maybeMap(
-                  loaded: (loaded) => loaded.ticketNumbers, orElse: () => null),
-              builder: (context, ticketNumbers) {
-                return ticketNumbers?.isNotEmpty == true
-                    ? Padding(
-                        padding: const EdgeInsets.only(bottom: Gaps.spacing16),
-                        child: TicketSection(numbers: ticketNumbers!),
-                      )
-                    : const SizedBox();
-              },
-            ),
-            const DrawBoard(),
-          ],
+    return BlocListener<DrawCubit, DrawState>(
+      // when loaded ticket number, start to draw
+      listenWhen: (previous, current) =>
+          previous.maybeMap(initial: (_) => true, orElse: () => false) &&
+          current.maybeMap(loaded: (_) => true, orElse: () => false),
+      listener: (context, state) => context.read<DrawCubit>().drawBalls(),
+      child: SafeArea(
+          child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(Gaps.spacing16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              BlocSelector<DrawCubit, DrawState, List<int>?>(
+                selector: (state) => state.maybeMap(
+                    loaded: (loaded) => loaded.ballNumbers, orElse: () => null),
+                builder: (context, ballNumbers) {
+                  return ballNumbers?.isNotEmpty == true
+                      ? Padding(
+                          padding:
+                              const EdgeInsets.only(bottom: Gaps.spacing16),
+                          child: BallSection(numbers: ballNumbers!),
+                        )
+                      : const SizedBox();
+                },
+              ),
+              BlocSelector<DrawCubit, DrawState, List<TicketNumber>?>(
+                selector: (state) => state.maybeMap(
+                    loaded: (loaded) => loaded.ticketNumbers,
+                    orElse: () => null),
+                builder: (context, ticketNumbers) {
+                  return ticketNumbers?.isNotEmpty == true
+                      ? Padding(
+                          padding:
+                              const EdgeInsets.only(bottom: Gaps.spacing16),
+                          child: TicketSection(numbers: ticketNumbers!),
+                        )
+                      : const SizedBox();
+                },
+              ),
+              const DrawBoard(),
+            ],
+          ),
         ),
-      ),
-    ));
+      )),
+    );
   }
 }
