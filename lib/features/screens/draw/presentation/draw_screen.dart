@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/core/theme/gaps.dart';
+import 'package:my_draw/features/screens/draw/domain/entities/ticket_number.dart';
+import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section.dart';
 import 'package:my_draw/features/screens/ticket/domain/entities/ticket.dart';
@@ -20,7 +23,10 @@ class DrawScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(S.of(context).draw),
       ),
-      body: DrawBody(ticket: ticket),
+      body: BlocProvider(
+        create: (context) => DrawCubit()..loadTicketNumbers(ticket.numbers),
+        child: const DrawBody(),
+      ),
     );
   }
 }
@@ -29,9 +35,8 @@ class DrawScreen extends StatelessWidget {
 class DrawBody extends StatelessWidget {
   const DrawBody({
     super.key,
-    required this.ticket,
   });
-  final Ticket ticket;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,8 +46,18 @@ class DrawBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TicketSection(numbers: ticket.numbers),
-            const SizedBox(height: Gaps.spacing16),
+            BlocSelector<DrawCubit, DrawState, List<TicketNumber>?>(
+              selector: (state) => state.maybeMap(
+                  loaded: (loaded) => loaded.ticketNumbers, orElse: () => null),
+              builder: (context, ticketNumbers) {
+                return ticketNumbers?.isNotEmpty == true
+                    ? Padding(
+                        padding: const EdgeInsets.only(bottom: Gaps.spacing16),
+                        child: TicketSection(numbers: ticketNumbers!),
+                      )
+                    : const SizedBox();
+              },
+            ),
             const DrawBoard(),
           ],
         ),
