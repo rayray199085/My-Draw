@@ -4,6 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:my_draw/core/router/app_route.dart';
 import 'package:my_draw/core/theme/gaps.dart';
 import 'package:my_draw/features/screens/ticket/presentation/cubit/ticket_cubit.dart';
+import 'package:my_draw/features/screens/ticket/presentation/ticket_screen_constants.dart';
+import 'package:my_draw/features/screens/ticket/presentation/widgets/icon_text_button.dart';
 import 'package:my_draw/features/screens/ticket/presentation/widgets/number_selection_board.dart';
 
 import '../../../../generated/l10n.dart';
@@ -40,16 +42,33 @@ class TicketBody extends StatelessWidget {
             padding: const EdgeInsets.all(Gaps.spacing16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
+              spacing: Gaps.spacing16,
               children: [
+                Row(
+                  spacing: Gaps.spacing8,
+                  children: [
+                    IconTextButton(
+                      icon: Icons.clear,
+                      label: S.of(context).clear,
+                      onTap: () =>
+                          context.read<TicketCubit>().clearSelectedNumbers(),
+                    ),
+                    IconTextButton(
+                      icon: Icons.vibration,
+                      label: S.of(context).auto,
+                      onTap: () => context
+                          .read<TicketCubit>()
+                          .autoGenerateTicketNumbers(),
+                    )
+                  ],
+                ),
                 NumberSelectionBoard(selectedNumbers: selectedNumbers),
-                const SizedBox(height: Gaps.spacing16),
                 ElevatedButton(
-                    onPressed: () => context.push(const DrawRoute().location,
-                        extra: selectedNumbers),
-                    // onPressed: selectedNumbers.length ==
-                    //         TicketScreenConstants.maxSelectedNumber
-                    //     ? () => DrawRoute().push(context)
-                    //     : null,
+                    onPressed: selectedNumbers.length ==
+                            TicketScreenConstants.maxSelectedNumber
+                        ? () => context.push(const DrawRoute().location,
+                            extra: selectedNumbers)
+                        : null,
                     child: Text(
                       S.of(context).start,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(

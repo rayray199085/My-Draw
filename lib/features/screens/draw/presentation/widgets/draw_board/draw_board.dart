@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_draw/features/screens/draw/presentation/widgets/animated_circle.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/theme/gaps.dart';
@@ -37,10 +36,6 @@ class DrawBoard extends StatelessWidget {
                     height: gridSectionHeight,
                   )
                 ],
-              ),
-              Align(
-                alignment: Alignment.center,
-                child: AnimatedCircle(number: 10),
               ),
             ],
           ),

@@ -50,11 +50,31 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `Auto`
+  String get auto {
+    return Intl.message(
+      'Auto',
+      name: 'auto',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Ball numbers`
   String get ballNumbers {
     return Intl.message(
       'Ball numbers',
       name: 'ballNumbers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Clear`
+  String get clear {
+    return Intl.message(
+      'Clear',
+      name: 'clear',
       desc: '',
       args: [],
     );

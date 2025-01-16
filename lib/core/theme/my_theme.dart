@@ -8,6 +8,7 @@ class MyTheme {
       primary: Colors.blueAccent,
       secondary: Colors.black87,
       onSecondary: Colors.white,
+      secondaryContainer: Colors.black26,
       tertiary: Colors.red,
     ),
     scaffoldBackgroundColor: Colors.white,

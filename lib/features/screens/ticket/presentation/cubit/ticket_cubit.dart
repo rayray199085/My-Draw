@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:my_draw/features/screens/ticket/presentation/ticket_screen_constants.dart';
+
+import '../../../../../core/constants/app_constants.dart';
 
 part 'ticket_state.dart';
 part 'ticket_cubit.freezed.dart';
@@ -21,5 +25,20 @@ class TicketCubit extends Cubit<TicketState> {
           selectedNumbers:
               selectedNumbers.where((n) => n != newNumber).toList()));
     }
+  }
+
+  void clearSelectedNumbers() => emit(state.copyWith(selectedNumbers: []));
+
+  void autoGenerateTicketNumbers() {
+    final List<int> ticketNumbers =
+        List.generate(AppConstants.totalTicketNumber, (index) => index + 1);
+    final List<int> generatedNumbers = [];
+    final random = Random();
+    for (var i = 0; i < TicketScreenConstants.maxSelectedNumber; i++) {
+      final index = random.nextInt(ticketNumbers.length);
+      final number = ticketNumbers.removeAt(index);
+      generatedNumbers.add(number);
+    }
+    emit(state.copyWith(selectedNumbers: generatedNumbers));
   }
 }
