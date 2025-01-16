@@ -1,8 +1,10 @@
 {
   "@@locale": "en",
+  "ballNumbers": "Ball numbers",
   "draw": "Draw",
   "heads": "Heads",
   "start": "Start",
   "tails": "Tails",
-  "ticket": "Ticket"
+  "ticket": "Ticket",
+  "ticketNumbers": "Ticket numbers"
 }

@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:my_draw/core/constants/app_constants.dart';
-import 'package:my_draw/features/screens/draw/domain/entities/ticket_number.dart';
 
 import '../draw_screen_constants.dart';
 
@@ -16,10 +15,8 @@ class DrawCubit extends Cubit<DrawState> {
   late final Timer timer;
 
   void loadTicketNumbers(List<int> numbers) {
-    final List<int> numberList = [...numbers]
-      ..sort(); // Spread operator creates a copy before sorting
     emit(DrawState.loaded(
-      ticketNumbers: numberList.map((n) => TicketNumber(value: n)).toList(),
+      ticketNumbers: [...numbers]..sort(),
       ballNumbers: [],
     ));
   }

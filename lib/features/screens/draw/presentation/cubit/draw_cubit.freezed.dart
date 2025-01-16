@@ -19,23 +19,20 @@ mixin _$DrawState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TicketNumber> ticketNumbers, List<int> ballNumbers)
+    required TResult Function(List<int> ticketNumbers, List<int> ballNumbers)
         loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TicketNumber> ticketNumbers, List<int> ballNumbers)?
-        loaded,
+    TResult? Function(List<int> ticketNumbers, List<int> ballNumbers)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketNumber> ticketNumbers, List<int> ballNumbers)?
-        loaded,
+    TResult Function(List<int> ticketNumbers, List<int> ballNumbers)? loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -122,8 +119,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TicketNumber> ticketNumbers, List<int> ballNumbers)
+    required TResult Function(List<int> ticketNumbers, List<int> ballNumbers)
         loaded,
   }) {
     return initial();
@@ -133,8 +129,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TicketNumber> ticketNumbers, List<int> ballNumbers)?
-        loaded,
+    TResult? Function(List<int> ticketNumbers, List<int> ballNumbers)? loaded,
   }) {
     return initial?.call();
   }
@@ -143,8 +138,7 @@ class _$InitialImpl implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketNumber> ticketNumbers, List<int> ballNumbers)?
-        loaded,
+    TResult Function(List<int> ticketNumbers, List<int> ballNumbers)? loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -195,7 +189,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
           _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<TicketNumber> ticketNumbers, List<int> ballNumbers});
+  $Res call({List<int> ticketNumbers, List<int> ballNumbers});
 }
 
 /// @nodoc
@@ -218,7 +212,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
       ticketNumbers: null == ticketNumbers
           ? _value._ticketNumbers
           : ticketNumbers // ignore: cast_nullable_to_non_nullable
-              as List<TicketNumber>,
+              as List<int>,
       ballNumbers: null == ballNumbers
           ? _value._ballNumbers
           : ballNumbers // ignore: cast_nullable_to_non_nullable
@@ -231,14 +225,14 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(
-      {required final List<TicketNumber> ticketNumbers,
+      {required final List<int> ticketNumbers,
       required final List<int> ballNumbers})
       : _ticketNumbers = ticketNumbers,
         _ballNumbers = ballNumbers;
 
-  final List<TicketNumber> _ticketNumbers;
+  final List<int> _ticketNumbers;
   @override
-  List<TicketNumber> get ticketNumbers {
+  List<int> get ticketNumbers {
     if (_ticketNumbers is EqualUnmodifiableListView) return _ticketNumbers;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_ticketNumbers);
@@ -286,8 +280,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(
-            List<TicketNumber> ticketNumbers, List<int> ballNumbers)
+    required TResult Function(List<int> ticketNumbers, List<int> ballNumbers)
         loaded,
   }) {
     return loaded(ticketNumbers, ballNumbers);
@@ -297,8 +290,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TicketNumber> ticketNumbers, List<int> ballNumbers)?
-        loaded,
+    TResult? Function(List<int> ticketNumbers, List<int> ballNumbers)? loaded,
   }) {
     return loaded?.call(ticketNumbers, ballNumbers);
   }
@@ -307,8 +299,7 @@ class _$LoadedImpl implements _Loaded {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TicketNumber> ticketNumbers, List<int> ballNumbers)?
-        loaded,
+    TResult Function(List<int> ticketNumbers, List<int> ballNumbers)? loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -351,10 +342,10 @@ class _$LoadedImpl implements _Loaded {
 
 abstract class _Loaded implements DrawState {
   const factory _Loaded(
-      {required final List<TicketNumber> ticketNumbers,
+      {required final List<int> ticketNumbers,
       required final List<int> ballNumbers}) = _$LoadedImpl;
 
-  List<TicketNumber> get ticketNumbers;
+  List<int> get ticketNumbers;
   List<int> get ballNumbers;
 
   /// Create a copy of DrawState

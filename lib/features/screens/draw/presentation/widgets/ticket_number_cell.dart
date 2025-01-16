@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_draw/features/screens/draw/domain/entities/ticket_number.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 
 import '../../../../../core/theme/radius_values.dart';
 
@@ -12,29 +13,35 @@ class TicketNumberCell extends StatelessWidget {
     super.key,
     required this.number,
   });
-  final TicketNumber number;
+  final int number;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: _TicketNumberCellConstants.cellSize,
-        height: _TicketNumberCellConstants.cellSize,
-        decoration: BoxDecoration(
-            color: number.isSelected
-                ? Theme.of(context).colorScheme.tertiary
-                : null,
-            borderRadius: BorderRadius.circular(RadiusValues.circular4),
-            border: Border.all(
-              color: Theme.of(context).colorScheme.tertiary,
-            )),
-        alignment: Alignment.center,
-        child: Text(
-          number.value.toString(),
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: number.isSelected
-                    ? Theme.of(context).colorScheme.onSecondary
-                    : Theme.of(context).colorScheme.secondary,
-              ),
-        ));
+    return BlocSelector<DrawCubit, DrawState, bool>(
+      selector: (state) => state.maybeMap(
+          loaded: (loaded) => loaded.ballNumbers.contains(number),
+          orElse: () => false),
+      builder: (context, isSelected) {
+        return Container(
+            width: _TicketNumberCellConstants.cellSize,
+            height: _TicketNumberCellConstants.cellSize,
+            decoration: BoxDecoration(
+                color:
+                    isSelected ? Theme.of(context).colorScheme.tertiary : null,
+                borderRadius: BorderRadius.circular(RadiusValues.circular4),
+                border: Border.all(
+                  color: Theme.of(context).colorScheme.tertiary,
+                )),
+            alignment: Alignment.center,
+            child: Text(
+              number.toString(),
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: isSelected
+                        ? Theme.of(context).colorScheme.onSecondary
+                        : Theme.of(context).colorScheme.secondary,
+                  ),
+            ));
+      },
+    );
   }
 }

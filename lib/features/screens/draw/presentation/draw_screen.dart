@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/core/theme/gaps.dart';
-import 'package:my_draw/features/screens/draw/domain/entities/ticket_number.dart';
 import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/ball_section.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section.dart';
-import 'package:my_draw/features/screens/ticket/domain/entities/ticket.dart';
 
 import '../../../../generated/l10n.dart';
 
 class DrawScreen extends StatelessWidget {
   const DrawScreen({
     super.key,
-    required this.ticket,
+    required this.ticketNumbers,
   });
 
-  final Ticket ticket;
+  final List<int> ticketNumbers;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +26,7 @@ class DrawScreen extends StatelessWidget {
         create: (context) {
           final cubit = DrawCubit();
           WidgetsBinding.instance.addPostFrameCallback(
-              (_) => cubit.loadTicketNumbers(ticket.numbers));
+              (_) => cubit.loadTicketNumbers(ticketNumbers));
           return cubit;
         },
         child: const DrawBody(),
@@ -62,27 +60,21 @@ class DrawBody extends StatelessWidget {
                 selector: (state) => state.maybeMap(
                     loaded: (loaded) => loaded.ballNumbers, orElse: () => null),
                 builder: (context, ballNumbers) {
-                  return ballNumbers?.isNotEmpty == true
-                      ? Padding(
-                          padding:
-                              const EdgeInsets.only(bottom: Gaps.spacing16),
-                          child: BallSection(numbers: ballNumbers!),
-                        )
-                      : const SizedBox();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: Gaps.spacing16),
+                    child: BallSection(numbers: ballNumbers ?? []),
+                  );
                 },
               ),
-              BlocSelector<DrawCubit, DrawState, List<TicketNumber>?>(
+              BlocSelector<DrawCubit, DrawState, List<int>?>(
                 selector: (state) => state.maybeMap(
                     loaded: (loaded) => loaded.ticketNumbers,
                     orElse: () => null),
                 builder: (context, ticketNumbers) {
-                  return ticketNumbers?.isNotEmpty == true
-                      ? Padding(
-                          padding:
-                              const EdgeInsets.only(bottom: Gaps.spacing16),
-                          child: TicketSection(numbers: ticketNumbers!),
-                        )
-                      : const SizedBox();
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: Gaps.spacing16),
+                    child: TicketSection(numbers: ticketNumbers ?? []),
+                  );
                 },
               ),
               const DrawBoard(),

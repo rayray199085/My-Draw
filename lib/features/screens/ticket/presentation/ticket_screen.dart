@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_draw/core/router/app_route.dart';
 import 'package:my_draw/core/theme/gaps.dart';
-import 'package:my_draw/features/screens/ticket/domain/entities/ticket.dart';
 import 'package:my_draw/features/screens/ticket/presentation/cubit/ticket_cubit.dart';
 import 'package:my_draw/features/screens/ticket/presentation/widgets/number_selection_board.dart';
 
@@ -32,9 +31,9 @@ class TicketBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<TicketCubit, TicketState, Ticket>(
-      selector: (state) => state.ticket,
-      builder: (context, ticket) {
+    return BlocSelector<TicketCubit, TicketState, List<int>>(
+      selector: (state) => state.selectedNumbers,
+      builder: (context, selectedNumbers) {
         return SafeArea(
             child: SingleChildScrollView(
           child: Padding(
@@ -42,11 +41,11 @@ class TicketBody extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                NumberSelectionBoard(selectedNumbers: ticket.numbers),
+                NumberSelectionBoard(selectedNumbers: selectedNumbers),
                 const SizedBox(height: Gaps.spacing16),
                 ElevatedButton(
-                    onPressed: () =>
-                        context.push(const DrawRoute().location, extra: ticket),
+                    onPressed: () => context.push(const DrawRoute().location,
+                        extra: selectedNumbers),
                     // onPressed: selectedNumbers.length ==
                     //         TicketScreenConstants.maxSelectedNumber
                     //     ? () => DrawRoute().push(context)
