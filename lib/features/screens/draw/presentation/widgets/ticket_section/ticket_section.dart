@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_number_cell.dart';
+import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section/ticket_number_cell.dart';
 
-import '../../../../../core/theme/gaps.dart';
-import '../../../../../generated/l10n.dart';
+import '../../../../../../core/theme/gaps.dart';
+import '../../../../../../generated/l10n.dart';
 
 class TicketSection extends StatelessWidget {
   const TicketSection({

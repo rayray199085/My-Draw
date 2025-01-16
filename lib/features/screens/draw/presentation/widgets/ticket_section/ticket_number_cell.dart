@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 
-import '../../../../../core/theme/radius_values.dart';
+import '../../../../../../core/theme/radius_values.dart';
 
 class _TicketNumberCellConstants {
   static const double cellSize = 32.0;

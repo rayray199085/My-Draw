@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_draw/core/theme/gaps.dart';
 
-import '../../../../../generated/l10n.dart';
+import '../../../../../../generated/l10n.dart';
 import 'ball_number_cell.dart';
 
 class BallSection extends StatelessWidget {

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/core/theme/gaps.dart';
 import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
-import 'package:my_draw/features/screens/draw/presentation/widgets/ball_section.dart';
-import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board.dart';
-import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section.dart';
+import 'package:my_draw/features/screens/draw/presentation/widgets/ball_section/ball_section.dart';
+import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/draw_board.dart';
+import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section/ticket_section.dart';
 
 import '../../../../generated/l10n.dart';
 
@@ -56,16 +56,16 @@ class DrawBody extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              BlocSelector<DrawCubit, DrawState, List<int>?>(
-                selector: (state) => state.maybeMap(
-                    loaded: (loaded) => loaded.ballNumbers, orElse: () => null),
-                builder: (context, ballNumbers) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: Gaps.spacing16),
-                    child: BallSection(numbers: ballNumbers ?? []),
-                  );
-                },
-              ),
+              // BlocSelector<DrawCubit, DrawState, List<int>?>(
+              //   selector: (state) => state.maybeMap(
+              //       loaded: (loaded) => loaded.ballNumbers, orElse: () => null),
+              //   builder: (context, ballNumbers) {
+              //     return Padding(
+              //       padding: const EdgeInsets.only(bottom: Gaps.spacing16),
+              //       child: BallSection(numbers: ballNumbers ?? []),
+              //     );
+              //   },
+              // ),
               BlocSelector<DrawCubit, DrawState, List<int>?>(
                 selector: (state) => state.maybeMap(
                     loaded: (loaded) => loaded.ticketNumbers,
