@@ -12,7 +12,7 @@ part 'draw_cubit.freezed.dart';
 
 class DrawCubit extends Cubit<DrawState> {
   DrawCubit() : super(const DrawState.initial());
-  late final Timer timer;
+  Timer? _timer;
 
   void loadTicketNumbers(List<int> numbers) {
     emit(DrawState.loaded(
@@ -25,7 +25,7 @@ class DrawCubit extends Cubit<DrawState> {
     final List<int> ballNumbers =
         List.generate(AppConstants.totalTicketNumber, (index) => index + 1);
     final random = Random();
-    timer = Timer.periodic(
+    _timer = Timer.periodic(
         const Duration(seconds: DrawScreenConstants.drawBallInterval), (t) {
       state.maybeMap(
           loaded: (loaded) {
@@ -35,7 +35,7 @@ class DrawCubit extends Cubit<DrawState> {
               emit(loaded.copyWith(
                   ballNumbers: [...loaded.ballNumbers, selectedBall]));
             } else {
-              timer.cancel();
+              _timer?.cancel();
             }
           },
           orElse: () {});
@@ -44,7 +44,7 @@ class DrawCubit extends Cubit<DrawState> {
 
   @override
   Future<void> close() {
-    timer.cancel();
+    _timer?.cancel();
     return super.close();
   }
 }
