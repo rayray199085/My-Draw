@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 import 'package:my_draw/features/screens/draw/presentation/enums/draw_board_section_type.dart';
+import 'package:my_draw/features/screens/draw/presentation/widgets/animated_circle.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/theme/gaps.dart';
@@ -49,6 +52,21 @@ class DrawBoard extends StatelessWidget {
                       )
                     ],
                   ),
+                  Positioned(
+                    top: 0,
+                    left:
+                        DrawScreenConstants.drawBoardLabelWidth + Gaps.spacing4,
+                    child: BlocSelector<DrawCubit, DrawState, int?>(
+                      selector: (state) => state.maybeMap(
+                          loaded: (loaded) => loaded.ballNumbers.lastOrNull,
+                          orElse: () => null),
+                      builder: (context, number) {
+                        return number != null
+                            ? AnimatedCircle(number: number)
+                            : const SizedBox.shrink();
+                      },
+                    ),
+                  )
                 ],
               ),
             ),

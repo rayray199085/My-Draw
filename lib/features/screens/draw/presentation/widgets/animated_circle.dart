@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 
 class AnimatedCircle extends StatefulWidget {
   final int number;
-  const AnimatedCircle({super.key, required this.number});
+
+  const AnimatedCircle({
+    super.key,
+    required this.number,
+  });
 
   @override
   State<AnimatedCircle> createState() => _AnimatedCircleState();
@@ -12,28 +16,43 @@ class _AnimatedCircleState extends State<AnimatedCircle>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _sizeAnimation;
-  late Animation<double> _opacityAnimation;
 
   @override
   void initState() {
     super.initState();
 
     _controller = AnimationController(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 1), // Total duration for the animation
       vsync: this,
     );
 
-    // Define size animation (starts from small to large size)
-    _sizeAnimation = Tween<double>(begin: 50, end: 100).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
-    );
+    _initializeAnimations();
 
-    // Define opacity animation (fades in from 0 to 1)
-    _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeIn),
-    );
+    _controller.forward(); // Start the animation initially
+  }
 
-    _controller.forward(); // Start the animation
+  void _initializeAnimations() {
+    // Define size animation (grow and shrink)
+    _sizeAnimation = TweenSequence<double>([
+      TweenSequenceItem(
+        tween: Tween<double>(begin: 100, end: 20).chain(
+          CurveTween(curve: Curves.easeIn),
+        ),
+        weight: 1,
+      ),
+    ]).animate(_controller);
+  }
+
+  @override
+  void didUpdateWidget(covariant AnimatedCircle oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    // Restart the animation when the number or target position changes
+    if (widget.number != oldWidget.number) {
+      _controller.reset();
+      _initializeAnimations(); // Reinitialize position animation
+      _controller.forward();
+    }
   }
 
   @override
@@ -48,14 +67,15 @@ class _AnimatedCircleState extends State<AnimatedCircle>
       animation: _controller,
       builder: (context, child) {
         return Center(
-          child: Opacity(
-            opacity: _opacityAnimation.value,
+          child: Transform.scale(
+            scale: _sizeAnimation.value / 100,
+            alignment: Alignment.topLeft,
             child: Container(
-              width: _sizeAnimation.value,
-              height: _sizeAnimation.value,
+              width: 100.0,
+              height: 100.0,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).colorScheme.primary,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
               alignment: Alignment.center,
               child: Text(
