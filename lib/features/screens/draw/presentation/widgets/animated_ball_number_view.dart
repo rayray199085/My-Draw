@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 
-class AnimatedCircle extends StatefulWidget {
+class AnimatedBallNumberView extends StatefulWidget {
   final int number;
 
-  const AnimatedCircle({
+  const AnimatedBallNumberView({
     super.key,
     required this.number,
   });
 
   @override
-  State<AnimatedCircle> createState() => _AnimatedCircleState();
+  State<AnimatedBallNumberView> createState() => _AnimatedBallNumberViewState();
 }
 
-class _AnimatedCircleState extends State<AnimatedCircle>
+class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _sizeAnimation;
@@ -44,7 +44,7 @@ class _AnimatedCircleState extends State<AnimatedCircle>
   }
 
   @override
-  void didUpdateWidget(covariant AnimatedCircle oldWidget) {
+  void didUpdateWidget(covariant AnimatedBallNumberView oldWidget) {
     super.didUpdateWidget(oldWidget);
 
     // Restart the animation when the number or target position changes
@@ -69,7 +69,7 @@ class _AnimatedCircleState extends State<AnimatedCircle>
         return Center(
           child: Transform.scale(
             scale: _sizeAnimation.value / 100,
-            alignment: Alignment.topLeft,
+            alignment: Alignment.center,
             child: Container(
               width: 100.0,
               height: 100.0,

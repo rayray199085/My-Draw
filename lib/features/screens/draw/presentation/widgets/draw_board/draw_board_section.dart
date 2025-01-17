@@ -41,8 +41,8 @@ class DrawBoardSection extends StatelessWidget {
             shrinkWrap: true,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: DrawScreenConstants.boardCrossAxisCount,
-              crossAxisSpacing: Gaps.spacing4,
-              mainAxisSpacing: Gaps.spacing4,
+              crossAxisSpacing: DrawScreenConstants.boardCrossAxisSpacing,
+              mainAxisSpacing: DrawScreenConstants.boardMainAxisSpacing,
               childAspectRatio:
                   DrawScreenConstants.drawBoardGridCellAspectRatio,
             ),

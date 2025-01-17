@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 import 'package:my_draw/features/screens/draw/presentation/enums/draw_board_section_type.dart';
-import 'package:my_draw/features/screens/draw/presentation/widgets/animated_circle.dart';
+import 'package:my_draw/features/screens/draw/presentation/utils/draw_board_helper.dart';
+import 'package:my_draw/features/screens/draw/presentation/widgets/animated_ball_number_view.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/theme/gaps.dart';
@@ -18,15 +19,22 @@ class DrawBoard extends StatelessWidget {
     final sectionItemCount = AppConstants.totalTicketNumber ~/ 2;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final gridSectionHeight = _calculateGridSectionHeight(
-            maxWidth: constraints.maxWidth, itemsCount: sectionItemCount);
-        final gridViewHeight = gridSectionHeight * 2 + Gaps.spacing16;
+        final double cellWidth =
+            DrawBoardHelper.getGridCellWidth(maxWidth: constraints.maxWidth);
+        final cellHeight =
+            cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
+        final gridSectionHeight = DrawBoardHelper.calculateGridSectionHeight(
+            cellHeight: cellHeight, itemsCount: sectionItemCount);
+        final gridViewHeight =
+            gridSectionHeight * 2 + DrawScreenConstants.boardSectionVerticalGap;
+        final drawerHeaderLabelWidth =
+            DrawScreenConstants.drawBoardLabelWidth + Gaps.spacing4;
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                left: DrawScreenConstants.drawBoardLabelWidth + Gaps.spacing4,
+              padding: EdgeInsets.only(
+                left: drawerHeaderLabelWidth,
                 bottom: Gaps.spacing4,
               ),
               child: DrawBoardHeader(labelWidth: gridSectionHeight),
@@ -36,6 +44,7 @@ class DrawBoard extends StatelessWidget {
               child: Stack(
                 children: [
                   Column(
+                    spacing: DrawScreenConstants.boardSectionVerticalGap,
                     children: [
                       DrawBoardSection(
                         startingIndex: 0,
@@ -43,7 +52,6 @@ class DrawBoard extends StatelessWidget {
                         sectionType: DrawBoardSectionType.heads,
                         height: gridSectionHeight,
                       ),
-                      const SizedBox(height: Gaps.spacing16),
                       DrawBoardSection(
                         startingIndex: sectionItemCount,
                         itemsCount: sectionItemCount,
@@ -52,20 +60,30 @@ class DrawBoard extends StatelessWidget {
                       )
                     ],
                   ),
-                  Positioned(
-                    top: 0,
-                    left:
-                        DrawScreenConstants.drawBoardLabelWidth + Gaps.spacing4,
-                    child: BlocSelector<DrawCubit, DrawState, int?>(
-                      selector: (state) => state.maybeMap(
-                          loaded: (loaded) => loaded.ballNumbers.lastOrNull,
-                          orElse: () => null),
-                      builder: (context, number) {
-                        return number != null
-                            ? AnimatedCircle(number: number)
-                            : const SizedBox.shrink();
-                      },
-                    ),
+                  BlocSelector<DrawCubit, DrawState, int?>(
+                    selector: (state) => state.maybeMap(
+                        loaded: (loaded) => loaded.ballNumbers.lastOrNull,
+                        orElse: () => null),
+                    builder: (context, number) {
+                      if (number != null) {
+                        // final point =
+                        //     DrawBoardHelper.getAnimationTargetPosition(
+                        //   number: number,
+                        //   gridSectionHeight: gridSectionHeight,
+                        //   cellWidth: cellWidth,
+                        //   cellHeight: cellHeight,
+                        // );
+                        final point =
+                            DrawBoardHelper.getAnimationStartingPosition(
+                                maxWidth: constraints.maxWidth,
+                                gridViewHeight: gridViewHeight);
+                        return Positioned(
+                            top: point.dy.toDouble(),
+                            left: point.dx.toDouble(),
+                            child: AnimatedBallNumberView(number: number));
+                      }
+                      return const SizedBox.shrink();
+                    },
                   )
                 ],
               ),
@@ -74,21 +92,5 @@ class DrawBoard extends StatelessWidget {
         );
       },
     );
-  }
-
-  double _calculateGridSectionHeight({
-    required double maxWidth,
-    required int itemsCount,
-  }) {
-    final double gridWidth = maxWidth - DrawScreenConstants.drawBoardLabelWidth;
-    final double cellWidth =
-        (gridWidth - DrawScreenConstants.boardCrossAxisCount * Gaps.spacing4) /
-            DrawScreenConstants.boardCrossAxisCount;
-    final cellHeight =
-        cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
-    final rowCount = itemsCount / DrawScreenConstants.boardCrossAxisCount;
-    final gridSectionHeight =
-        cellHeight * rowCount + (rowCount - 1) * Gaps.spacing4;
-    return gridSectionHeight;
   }
 }
