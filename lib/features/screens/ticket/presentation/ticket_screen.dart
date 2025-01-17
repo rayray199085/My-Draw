@@ -44,7 +44,7 @@ class TicketBody extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               spacing: Gaps.spacing16,
               children: [
-                const TicketHeader(),
+                TicketHeader(numberCount: selectedNumbers.length),
                 NumberSelectionBoard(selectedNumbers: selectedNumbers),
                 ElevatedButton(
                     onPressed: selectedNumbers.length ==

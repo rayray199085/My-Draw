@@ -50,6 +50,16 @@ class S {
     return Localizations.of<S>(context, S);
   }
 
+  /// `All done!`
+  String get allDone {
+    return Intl.message(
+      'All done!',
+      name: 'allDone',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Auto`
   String get auto {
     return Intl.message(
@@ -95,6 +105,26 @@ class S {
     return Intl.message(
       'Heads',
       name: 'heads',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick {count} numbers`
+  String pickNumbers(Object count) {
+    return Intl.message(
+      'Pick $count numbers',
+      name: 'pickNumbers',
+      desc: '',
+      args: [count],
+    );
+  }
+
+  /// `Pick 1 number`
+  String get pickOneNumber {
+    return Intl.message(
+      'Pick 1 number',
+      name: 'pickOneNumber',
       desc: '',
       args: [],
     );

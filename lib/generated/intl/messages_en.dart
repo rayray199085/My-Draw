@@ -20,13 +20,18 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(count) => "Pick ${count} numbers";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "allDone": MessageLookupByLibrary.simpleMessage("All done!"),
         "auto": MessageLookupByLibrary.simpleMessage("Auto"),
         "ballNumbers": MessageLookupByLibrary.simpleMessage("Ball numbers"),
         "clear": MessageLookupByLibrary.simpleMessage("Clear"),
         "draw": MessageLookupByLibrary.simpleMessage("Draw"),
         "heads": MessageLookupByLibrary.simpleMessage("Heads"),
+        "pickNumbers": m0,
+        "pickOneNumber": MessageLookupByLibrary.simpleMessage("Pick 1 number"),
         "start": MessageLookupByLibrary.simpleMessage("Start"),
         "tails": MessageLookupByLibrary.simpleMessage("Tails"),
         "ticket": MessageLookupByLibrary.simpleMessage("Ticket"),
