@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">15</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">15</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-01-17 11:09:27</td>
+            <td class="headerValue">2025-01-17 11:54:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -70,33 +70,33 @@
 <span id="L8"><span class="lineNum">       8</span>              : import 'draw_board_header_label.dart';</span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
 <span id="L10"><span class="lineNum">      10</span>              : class DrawBoardHeader extends StatelessWidget {</span>
-<span id="L11"><span class="lineNum">      11</span> <span class="tlaUNC tlaBgUNC">           0 :   const DrawBoardHeader({</span></span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC tlaBgGNC">           3 :   const DrawBoardHeader({</span></span>
 <span id="L12"><span class="lineNum">      12</span>              :     super.key,</span>
 <span id="L13"><span class="lineNum">      13</span>              :     required this.labelWidth,</span>
 <span id="L14"><span class="lineNum">      14</span>              :   });</span>
 <span id="L15"><span class="lineNum">      15</span>              :   final double labelWidth;</span>
 <span id="L16"><span class="lineNum">      16</span>              : </span>
-<span id="L17"><span class="lineNum">      17</span> <span class="tlaUNC">           0 :   @override</span></span>
+<span id="L17"><span class="lineNum">      17</span> <span class="tlaGNC">           3 :   @override</span></span>
 <span id="L18"><span class="lineNum">      18</span>              :   Widget build(BuildContext context) {</span>
-<span id="L19"><span class="lineNum">      19</span> <span class="tlaUNC">           0 :     return BlocSelector&lt;DrawCubit, DrawState, List&lt;int&gt;&gt;(</span></span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaUNC">           0 :       selector: (state) =&gt; state.maybeMap(</span></span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaUNC">           0 :           loaded: (loaded) =&gt; loaded.ballNumbers, orElse: () =&gt; []),</span></span>
-<span id="L22"><span class="lineNum">      22</span> <span class="tlaUNC">           0 :       builder: (context, ballNumbers) {</span></span>
+<span id="L19"><span class="lineNum">      19</span> <span class="tlaGNC">           3 :     return BlocSelector&lt;DrawCubit, DrawState, List&lt;int&gt;&gt;(</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           6 :       selector: (state) =&gt; state.maybeMap(</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           8 :           loaded: (loaded) =&gt; loaded.ballNumbers, orElse: () =&gt; []),</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           3 :       builder: (context, ballNumbers) {</span></span>
 <span id="L23"><span class="lineNum">      23</span>              :         final tailsCount = ballNumbers</span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaUNC">           0 :             .where((number) =&gt; number &gt; AppConstants.totalTicketNumber ~/ 2)</span></span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaUNC">           0 :             .length;</span></span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaUNC">           0 :         final headCount = ballNumbers.length - tailsCount;</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaUNC">           0 :         return Row(</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">          12 :             .where((number) =&gt; number &gt; AppConstants.totalTicketNumber ~/ 2)</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           3 :             .length;</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           6 :         final headCount = ballNumbers.length - tailsCount;</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           3 :         return Row(</span></span>
 <span id="L28"><span class="lineNum">      28</span>              :           spacing: Gaps.spacing16,</span>
-<span id="L29"><span class="lineNum">      29</span> <span class="tlaUNC">           0 :           children: [</span></span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaUNC">           0 :             DrawBoardHeaderLabel(</span></span>
+<span id="L29"><span class="lineNum">      29</span> <span class="tlaGNC">           3 :           children: [</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           3 :             DrawBoardHeaderLabel(</span></span>
 <span id="L31"><span class="lineNum">      31</span>              :               type: DrawBoardSectionType.heads,</span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC">           0 :               width: labelWidth,</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           3 :               width: labelWidth,</span></span>
 <span id="L33"><span class="lineNum">      33</span>              :               count: headCount,</span>
 <span id="L34"><span class="lineNum">      34</span>              :             ),</span>
-<span id="L35"><span class="lineNum">      35</span> <span class="tlaUNC">           0 :             DrawBoardHeaderLabel(</span></span>
+<span id="L35"><span class="lineNum">      35</span> <span class="tlaGNC">           3 :             DrawBoardHeaderLabel(</span></span>
 <span id="L36"><span class="lineNum">      36</span>              :               type: DrawBoardSectionType.tails,</span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC">           0 :               width: labelWidth,</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           3 :               width: labelWidth,</span></span>
 <span id="L38"><span class="lineNum">      38</span>              :               count: tailsCount,</span>
 <span id="L39"><span class="lineNum">      39</span>              :             ),</span>
 <span id="L40"><span class="lineNum">      40</span>              :           ],</span>

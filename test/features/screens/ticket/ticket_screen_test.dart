@@ -21,8 +21,7 @@ void main() {
     ticketCubit = MockTicketCubit();
   });
 
-  testWidgets(
-      'Should render TicketScreen with AppBar and Scaffold when TicketCubit is in a loaded state',
+  testWidgets('Should render TicketScreen with AppBar and Scaffold',
       (WidgetTester tester) async {
     when(ticketCubit.state)
         .thenReturn(const TicketState(selectedNumbers: [1, 2, 3, 4, 5]));
@@ -41,7 +40,7 @@ void main() {
   });
 
   testWidgets(
-      'Should render TicketBody with TicketHeader, NumberSelectionBoard and ElevatedButton when TicketCubit is in a loaded state',
+      'Should render TicketBody with TicketHeader, NumberSelectionBoard and ElevatedButton',
       (WidgetTester tester) async {
     when(ticketCubit.state)
         .thenReturn(const TicketState(selectedNumbers: [1, 2, 3, 4, 5]));

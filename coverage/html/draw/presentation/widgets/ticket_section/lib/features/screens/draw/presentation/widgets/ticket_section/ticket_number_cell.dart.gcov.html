@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">0.0&nbsp;%</td>
+            <td class="headerCovTableEntryHi">94.4&nbsp;%</td>
             <td class="headerCovTableEntry">18</td>
-            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">17</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-01-17 11:09:27</td>
+            <td class="headerValue">2025-01-17 11:54:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -71,36 +71,36 @@
 <span id="L9"><span class="lineNum">       9</span>              : }</span>
 <span id="L10"><span class="lineNum">      10</span>              : </span>
 <span id="L11"><span class="lineNum">      11</span>              : class TicketNumberCell extends StatelessWidget {</span>
-<span id="L12"><span class="lineNum">      12</span> <span class="tlaUNC tlaBgUNC">           0 :   const TicketNumberCell({</span></span>
+<span id="L12"><span class="lineNum">      12</span> <span class="tlaGNC tlaBgGNC">           3 :   const TicketNumberCell({</span></span>
 <span id="L13"><span class="lineNum">      13</span>              :     super.key,</span>
 <span id="L14"><span class="lineNum">      14</span>              :     required this.number,</span>
 <span id="L15"><span class="lineNum">      15</span>              :   });</span>
 <span id="L16"><span class="lineNum">      16</span>              :   final int number;</span>
 <span id="L17"><span class="lineNum">      17</span>              : </span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaUNC">           0 :   @override</span></span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           3 :   @override</span></span>
 <span id="L19"><span class="lineNum">      19</span>              :   Widget build(BuildContext context) {</span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaUNC">           0 :     return BlocSelector&lt;DrawCubit, DrawState, bool&gt;(</span></span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaUNC">           0 :       selector: (state) =&gt; state.maybeMap(</span></span>
-<span id="L22"><span class="lineNum">      22</span> <span class="tlaUNC">           0 :           loaded: (loaded) =&gt; loaded.ballNumbers.contains(number),</span></span>
-<span id="L23"><span class="lineNum">      23</span> <span class="tlaUNC">           0 :           orElse: () =&gt; false),</span></span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaUNC">           0 :       builder: (context, isSelected) {</span></span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaUNC">           0 :         return Container(</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           3 :     return BlocSelector&lt;DrawCubit, DrawState, bool&gt;(</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           6 :       selector: (state) =&gt; state.maybeMap(</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">          12 :           loaded: (loaded) =&gt; loaded.ballNumbers.contains(number),</span></span>
+<span id="L23"><span class="lineNum">      23</span> <span class="tlaUNC tlaBgUNC">           0 :           orElse: () =&gt; false),</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC tlaBgGNC">           3 :       builder: (context, isSelected) {</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           3 :         return Container(</span></span>
 <span id="L26"><span class="lineNum">      26</span>              :             width: _TicketNumberCellConstants.cellSize,</span>
 <span id="L27"><span class="lineNum">      27</span>              :             height: _TicketNumberCellConstants.cellSize,</span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaUNC">           0 :             decoration: BoxDecoration(</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           3 :             decoration: BoxDecoration(</span></span>
 <span id="L29"><span class="lineNum">      29</span>              :                 color:</span>
-<span id="L30"><span class="lineNum">      30</span> <span class="tlaUNC">           0 :                     isSelected ? Theme.of(context).colorScheme.tertiary : null,</span></span>
-<span id="L31"><span class="lineNum">      31</span> <span class="tlaUNC">           0 :                 borderRadius: BorderRadius.circular(RadiusValues.circular4),</span></span>
-<span id="L32"><span class="lineNum">      32</span> <span class="tlaUNC">           0 :                 border: Border.all(</span></span>
-<span id="L33"><span class="lineNum">      33</span> <span class="tlaUNC">           0 :                   color: Theme.of(context).colorScheme.tertiary,</span></span>
+<span id="L30"><span class="lineNum">      30</span> <span class="tlaGNC">           9 :                     isSelected ? Theme.of(context).colorScheme.tertiary : null,</span></span>
+<span id="L31"><span class="lineNum">      31</span> <span class="tlaGNC">           3 :                 borderRadius: BorderRadius.circular(RadiusValues.circular4),</span></span>
+<span id="L32"><span class="lineNum">      32</span> <span class="tlaGNC">           3 :                 border: Border.all(</span></span>
+<span id="L33"><span class="lineNum">      33</span> <span class="tlaGNC">           9 :                   color: Theme.of(context).colorScheme.tertiary,</span></span>
 <span id="L34"><span class="lineNum">      34</span>              :                 )),</span>
 <span id="L35"><span class="lineNum">      35</span>              :             alignment: Alignment.center,</span>
-<span id="L36"><span class="lineNum">      36</span> <span class="tlaUNC">           0 :             child: Text(</span></span>
-<span id="L37"><span class="lineNum">      37</span> <span class="tlaUNC">           0 :               number.toString(),</span></span>
-<span id="L38"><span class="lineNum">      38</span> <span class="tlaUNC">           0 :               style: Theme.of(context).textTheme.labelMedium?.copyWith(</span></span>
+<span id="L36"><span class="lineNum">      36</span> <span class="tlaGNC">           3 :             child: Text(</span></span>
+<span id="L37"><span class="lineNum">      37</span> <span class="tlaGNC">           6 :               number.toString(),</span></span>
+<span id="L38"><span class="lineNum">      38</span> <span class="tlaGNC">          12 :               style: Theme.of(context).textTheme.labelMedium?.copyWith(</span></span>
 <span id="L39"><span class="lineNum">      39</span>              :                     color: isSelected</span>
-<span id="L40"><span class="lineNum">      40</span> <span class="tlaUNC">           0 :                         ? Theme.of(context).colorScheme.onSecondary</span></span>
-<span id="L41"><span class="lineNum">      41</span> <span class="tlaUNC">           0 :                         : Theme.of(context).colorScheme.secondary,</span></span>
+<span id="L40"><span class="lineNum">      40</span> <span class="tlaGNC">           9 :                         ? Theme.of(context).colorScheme.onSecondary</span></span>
+<span id="L41"><span class="lineNum">      41</span> <span class="tlaGNC">           6 :                         : Theme.of(context).colorScheme.secondary,</span></span>
 <span id="L42"><span class="lineNum">      42</span>              :                   ),</span>
 <span id="L43"><span class="lineNum">      43</span>              :             ));</span>
 <span id="L44"><span class="lineNum">      44</span>              :       },</span>

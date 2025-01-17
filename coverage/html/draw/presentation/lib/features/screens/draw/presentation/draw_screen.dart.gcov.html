@@ -31,13 +31,13 @@
             <td class="headerValue">lcov.info</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntryLo">3.4&nbsp;%</td>
+            <td class="headerCovTableEntryHi">100.0&nbsp;%</td>
             <td class="headerCovTableEntry">29</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">29</td>
           </tr>
           <tr>
             <td class="headerItem">Test Date:</td>
-            <td class="headerValue">2025-01-17 11:09:27</td>
+            <td class="headerValue">2025-01-17 11:54:52</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntryHi">-</td>
@@ -70,24 +70,24 @@
 <span id="L8"><span class="lineNum">       8</span>              : import '../../../../generated/l10n.dart';</span>
 <span id="L9"><span class="lineNum">       9</span>              : </span>
 <span id="L10"><span class="lineNum">      10</span>              : class DrawScreen extends StatelessWidget {</span>
-<span id="L11"><span class="lineNum">      11</span> <span class="tlaUNC tlaBgUNC">           0 :   const DrawScreen({</span></span>
+<span id="L11"><span class="lineNum">      11</span> <span class="tlaGNC tlaBgGNC">           1 :   const DrawScreen({</span></span>
 <span id="L12"><span class="lineNum">      12</span>              :     super.key,</span>
 <span id="L13"><span class="lineNum">      13</span>              :     required this.ticketNumbers,</span>
 <span id="L14"><span class="lineNum">      14</span>              :   });</span>
 <span id="L15"><span class="lineNum">      15</span>              : </span>
 <span id="L16"><span class="lineNum">      16</span>              :   final List&lt;int&gt; ticketNumbers;</span>
 <span id="L17"><span class="lineNum">      17</span>              : </span>
-<span id="L18"><span class="lineNum">      18</span> <span class="tlaUNC">           0 :   @override</span></span>
+<span id="L18"><span class="lineNum">      18</span> <span class="tlaGNC">           1 :   @override</span></span>
 <span id="L19"><span class="lineNum">      19</span>              :   Widget build(BuildContext context) {</span>
-<span id="L20"><span class="lineNum">      20</span> <span class="tlaUNC">           0 :     return Scaffold(</span></span>
-<span id="L21"><span class="lineNum">      21</span> <span class="tlaUNC">           0 :       appBar: AppBar(</span></span>
-<span id="L22"><span class="lineNum">      22</span> <span class="tlaUNC">           0 :         title: Text(S.of(context).draw),</span></span>
+<span id="L20"><span class="lineNum">      20</span> <span class="tlaGNC">           1 :     return Scaffold(</span></span>
+<span id="L21"><span class="lineNum">      21</span> <span class="tlaGNC">           1 :       appBar: AppBar(</span></span>
+<span id="L22"><span class="lineNum">      22</span> <span class="tlaGNC">           3 :         title: Text(S.of(context).draw),</span></span>
 <span id="L23"><span class="lineNum">      23</span>              :       ),</span>
-<span id="L24"><span class="lineNum">      24</span> <span class="tlaUNC">           0 :       body: BlocProvider(</span></span>
-<span id="L25"><span class="lineNum">      25</span> <span class="tlaUNC">           0 :         create: (context) {</span></span>
-<span id="L26"><span class="lineNum">      26</span> <span class="tlaUNC">           0 :           final cubit = DrawCubit();</span></span>
-<span id="L27"><span class="lineNum">      27</span> <span class="tlaUNC">           0 :           WidgetsBinding.instance.addPostFrameCallback(</span></span>
-<span id="L28"><span class="lineNum">      28</span> <span class="tlaUNC">           0 :               (_) =&gt; cubit.loadTicketNumbers(ticketNumbers));</span></span>
+<span id="L24"><span class="lineNum">      24</span> <span class="tlaGNC">           1 :       body: BlocProvider(</span></span>
+<span id="L25"><span class="lineNum">      25</span> <span class="tlaGNC">           1 :         create: (context) {</span></span>
+<span id="L26"><span class="lineNum">      26</span> <span class="tlaGNC">           1 :           final cubit = DrawCubit();</span></span>
+<span id="L27"><span class="lineNum">      27</span> <span class="tlaGNC">           2 :           WidgetsBinding.instance.addPostFrameCallback(</span></span>
+<span id="L28"><span class="lineNum">      28</span> <span class="tlaGNC">           3 :               (_) =&gt; cubit.loadTicketNumbers(ticketNumbers));</span></span>
 <span id="L29"><span class="lineNum">      29</span>              :           return cubit;</span>
 <span id="L30"><span class="lineNum">      30</span>              :         },</span>
 <span id="L31"><span class="lineNum">      31</span>              :         child: const DrawBody(),</span>
@@ -98,33 +98,33 @@
 <span id="L36"><span class="lineNum">      36</span>              : </span>
 <span id="L37"><span class="lineNum">      37</span>              : @visibleForTesting</span>
 <span id="L38"><span class="lineNum">      38</span>              : class DrawBody extends StatelessWidget {</span>
-<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC tlaBgGNC">           1 :   const DrawBody({</span></span>
+<span id="L39"><span class="lineNum">      39</span> <span class="tlaGNC">          12 :   const DrawBody({</span></span>
 <span id="L40"><span class="lineNum">      40</span>              :     super.key,</span>
 <span id="L41"><span class="lineNum">      41</span>              :   });</span>
 <span id="L42"><span class="lineNum">      42</span>              : </span>
-<span id="L43"><span class="lineNum">      43</span> <span class="tlaUNC tlaBgUNC">           0 :   @override</span></span>
+<span id="L43"><span class="lineNum">      43</span> <span class="tlaGNC">           1 :   @override</span></span>
 <span id="L44"><span class="lineNum">      44</span>              :   Widget build(BuildContext context) {</span>
-<span id="L45"><span class="lineNum">      45</span> <span class="tlaUNC">           0 :     return BlocListener&lt;DrawCubit, DrawState&gt;(</span></span>
+<span id="L45"><span class="lineNum">      45</span> <span class="tlaGNC">           1 :     return BlocListener&lt;DrawCubit, DrawState&gt;(</span></span>
 <span id="L46"><span class="lineNum">      46</span>              :       // when loaded ticket number, start to draw</span>
-<span id="L47"><span class="lineNum">      47</span> <span class="tlaUNC">           0 :       listenWhen: (previous, current) =&gt;</span></span>
-<span id="L48"><span class="lineNum">      48</span> <span class="tlaUNC">           0 :           previous.maybeMap(initial: (_) =&gt; true, orElse: () =&gt; false) &amp;&amp;</span></span>
-<span id="L49"><span class="lineNum">      49</span> <span class="tlaUNC">           0 :           current.maybeMap(loaded: (_) =&gt; true, orElse: () =&gt; false),</span></span>
-<span id="L50"><span class="lineNum">      50</span> <span class="tlaUNC">           0 :       listener: (context, state) =&gt; context.read&lt;DrawCubit&gt;().drawBalls(),</span></span>
-<span id="L51"><span class="lineNum">      51</span> <span class="tlaUNC">           0 :       child: SafeArea(</span></span>
-<span id="L52"><span class="lineNum">      52</span> <span class="tlaUNC">           0 :           child: SingleChildScrollView(</span></span>
-<span id="L53"><span class="lineNum">      53</span> <span class="tlaUNC">           0 :         child: Padding(</span></span>
+<span id="L47"><span class="lineNum">      47</span> <span class="tlaGNC">           1 :       listenWhen: (previous, current) =&gt;</span></span>
+<span id="L48"><span class="lineNum">      48</span> <span class="tlaGNC">           2 :           previous.maybeMap(initial: (_) =&gt; true, orElse: () =&gt; false) &amp;&amp;</span></span>
+<span id="L49"><span class="lineNum">      49</span> <span class="tlaGNC">           2 :           current.maybeMap(loaded: (_) =&gt; true, orElse: () =&gt; false),</span></span>
+<span id="L50"><span class="lineNum">      50</span> <span class="tlaGNC">           3 :       listener: (context, state) =&gt; context.read&lt;DrawCubit&gt;().drawBalls(),</span></span>
+<span id="L51"><span class="lineNum">      51</span> <span class="tlaGNC">           1 :       child: SafeArea(</span></span>
+<span id="L52"><span class="lineNum">      52</span> <span class="tlaGNC">           1 :           child: SingleChildScrollView(</span></span>
+<span id="L53"><span class="lineNum">      53</span> <span class="tlaGNC">           1 :         child: Padding(</span></span>
 <span id="L54"><span class="lineNum">      54</span>              :           padding: const EdgeInsets.all(Gaps.spacing16),</span>
-<span id="L55"><span class="lineNum">      55</span> <span class="tlaUNC">           0 :           child: Column(</span></span>
+<span id="L55"><span class="lineNum">      55</span> <span class="tlaGNC">           1 :           child: Column(</span></span>
 <span id="L56"><span class="lineNum">      56</span>              :             crossAxisAlignment: CrossAxisAlignment.start,</span>
-<span id="L57"><span class="lineNum">      57</span> <span class="tlaUNC">           0 :             children: [</span></span>
-<span id="L58"><span class="lineNum">      58</span> <span class="tlaUNC">           0 :               BlocSelector&lt;DrawCubit, DrawState, List&lt;int&gt;?&gt;(</span></span>
-<span id="L59"><span class="lineNum">      59</span> <span class="tlaUNC">           0 :                 selector: (state) =&gt; state.maybeMap(</span></span>
-<span id="L60"><span class="lineNum">      60</span> <span class="tlaUNC">           0 :                     loaded: (loaded) =&gt; loaded.ticketNumbers,</span></span>
-<span id="L61"><span class="lineNum">      61</span> <span class="tlaUNC">           0 :                     orElse: () =&gt; null),</span></span>
-<span id="L62"><span class="lineNum">      62</span> <span class="tlaUNC">           0 :                 builder: (context, ticketNumbers) {</span></span>
-<span id="L63"><span class="lineNum">      63</span> <span class="tlaUNC">           0 :                   return Padding(</span></span>
+<span id="L57"><span class="lineNum">      57</span> <span class="tlaGNC">           1 :             children: [</span></span>
+<span id="L58"><span class="lineNum">      58</span> <span class="tlaGNC">           1 :               BlocSelector&lt;DrawCubit, DrawState, List&lt;int&gt;?&gt;(</span></span>
+<span id="L59"><span class="lineNum">      59</span> <span class="tlaGNC">           2 :                 selector: (state) =&gt; state.maybeMap(</span></span>
+<span id="L60"><span class="lineNum">      60</span> <span class="tlaGNC">           2 :                     loaded: (loaded) =&gt; loaded.ticketNumbers,</span></span>
+<span id="L61"><span class="lineNum">      61</span> <span class="tlaGNC">           1 :                     orElse: () =&gt; null),</span></span>
+<span id="L62"><span class="lineNum">      62</span> <span class="tlaGNC">           1 :                 builder: (context, ticketNumbers) {</span></span>
+<span id="L63"><span class="lineNum">      63</span> <span class="tlaGNC">           1 :                   return Padding(</span></span>
 <span id="L64"><span class="lineNum">      64</span>              :                     padding: const EdgeInsets.only(bottom: Gaps.spacing16),</span>
-<span id="L65"><span class="lineNum">      65</span> <span class="tlaUNC">           0 :                     child: TicketSection(numbers: ticketNumbers ?? []),</span></span>
+<span id="L65"><span class="lineNum">      65</span> <span class="tlaGNC">           2 :                     child: TicketSection(numbers: ticketNumbers ?? []),</span></span>
 <span id="L66"><span class="lineNum">      66</span>              :                   );</span>
 <span id="L67"><span class="lineNum">      67</span>              :                 },</span>
 <span id="L68"><span class="lineNum">      68</span>              :               ),</span>
