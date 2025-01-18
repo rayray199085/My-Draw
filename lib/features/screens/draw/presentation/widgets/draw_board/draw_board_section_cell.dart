@@ -61,13 +61,15 @@ class _DrawBoardSectionCellState extends State<DrawBoardSectionCell>
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<DrawCubit, DrawState, bool>(
+    return BlocSelector<DrawCubit, DrawState, List<int>>(
       selector: (state) => state.maybeMap(
-        loaded: (loaded) => loaded.ballNumbers.contains(widget.number),
-        orElse: () => false,
+        loaded: (loaded) => loaded.ballNumbers,
+        orElse: () => [],
       ),
-      builder: (context, isSelected) {
-        if (isSelected && !_isAnimating) {
+      builder: (context, numbers) {
+        final shouldHighlight = numbers.lastOrNull == widget.number;
+        final hasSelected = numbers.contains(widget.number);
+        if (shouldHighlight && !_isAnimating) {
           _isAnimating = true;
           _controller.forward().then((_) => _isAnimating = false);
         }
@@ -76,18 +78,18 @@ class _DrawBoardSectionCellState extends State<DrawBoardSectionCell>
           animation: _controller,
           builder: (context, child) {
             return Transform.scale(
-              scale: isSelected
+              scale: shouldHighlight
                   ? _sizeAnimation.value
                   : _DrawBoardSectionCellConstants.scaleFactorFrom,
               child: Container(
                 decoration: BoxDecoration(
-                  color: isSelected
+                  color: hasSelected
                       ? Theme.of(context).colorScheme.tertiary
                       : Colors.black26,
                   borderRadius: BorderRadius.circular(RadiusValues.circular4),
                 ),
                 alignment: Alignment.center,
-                child: isSelected
+                child: hasSelected
                     ? Text(
                         widget.number.toString(),
                         style: Theme.of(context)
