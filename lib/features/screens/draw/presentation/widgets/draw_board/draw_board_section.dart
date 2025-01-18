@@ -15,12 +15,14 @@ class DrawBoardSection extends StatelessWidget {
     required this.itemsCount,
     required this.sectionType,
     required this.height,
+    required this.ballNumbers,
   });
 
   final int startingIndex;
   final int itemsCount;
   final DrawBoardSectionType sectionType;
   final double height;
+  final List<int> ballNumbers;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +50,12 @@ class DrawBoardSection extends StatelessWidget {
             ),
             itemCount: itemsCount,
             itemBuilder: (context, index) {
-              final number = startingIndex + index + 1; // number = index + 1
-              return DrawBoardSectionCell(number: number);
+              final cellNumber =
+                  startingIndex + index + 1; // number = index + 1
+              return DrawBoardSectionCell(
+                number: cellNumber,
+                isSelected: ballNumbers.contains(cellNumber),
+              );
             },
           ),
         ),

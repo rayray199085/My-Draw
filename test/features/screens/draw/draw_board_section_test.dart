@@ -10,7 +10,6 @@ import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/dr
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/draw_board_section_label.dart';
 
 import '../../../utils/screen_test_wrapper.dart';
-
 import 'draw_board_section_test.mocks.dart';
 
 @GenerateMocks([
@@ -35,9 +34,11 @@ void main() {
           create: (context) => drawCubit,
           child: const Scaffold(
               body: DrawBoardSection(
-                  itemsCount: 40,
-                  sectionType: DrawBoardSectionType.heads,
-                  height: 200.0)),
+            itemsCount: 40,
+            sectionType: DrawBoardSectionType.heads,
+            height: 200.0,
+            ballNumbers: [1, 2, 3, 4, 5],
+          )),
         ),
       ),
     );

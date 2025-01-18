@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../draw_screen_constants.dart';
@@ -99,22 +101,30 @@ class _DrawBoardContentState extends State<DrawBoardContent>
       height: _gridViewHeight,
       child: Stack(
         children: [
-          Column(
-            spacing: DrawScreenConstants.boardSectionVerticalGap,
-            children: [
-              DrawBoardSection(
-                startingIndex: 0,
-                itemsCount: sectionItemCount,
-                sectionType: DrawBoardSectionType.heads,
-                height: widget.gridSectionHeight,
-              ),
-              DrawBoardSection(
-                startingIndex: sectionItemCount,
-                itemsCount: sectionItemCount,
-                sectionType: DrawBoardSectionType.tails,
-                height: widget.gridSectionHeight,
-              )
-            ],
+          BlocSelector<DrawCubit, DrawState, List<int>>(
+            selector: (state) => state.maybeMap(
+                loaded: (loaded) => loaded.ballNumbers, orElse: () => []),
+            builder: (context, ballNumbers) {
+              return Column(
+                spacing: DrawScreenConstants.boardSectionVerticalGap,
+                children: [
+                  DrawBoardSection(
+                    startingIndex: 0,
+                    itemsCount: sectionItemCount,
+                    sectionType: DrawBoardSectionType.heads,
+                    height: widget.gridSectionHeight,
+                    ballNumbers: ballNumbers,
+                  ),
+                  DrawBoardSection(
+                    startingIndex: sectionItemCount,
+                    itemsCount: sectionItemCount,
+                    sectionType: DrawBoardSectionType.tails,
+                    height: widget.gridSectionHeight,
+                    ballNumbers: ballNumbers,
+                  )
+                ],
+              );
+            },
           ),
           if (widget.number != null)
             AnimatedBuilder(

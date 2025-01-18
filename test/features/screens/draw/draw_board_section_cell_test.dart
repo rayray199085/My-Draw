@@ -1,39 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/draw_board_section_cell.dart';
 
 import '../../../utils/screen_test_wrapper.dart';
 
-import 'draw_board_section_cell_test.mocks.dart';
-
-@GenerateMocks([
-  DrawCubit,
-])
 void main() {
-  late DrawCubit drawCubit;
-
-  setUp(() {
-    drawCubit = MockDrawCubit();
-  });
   testWidgets(
       'Should render DrawBoardSectionCell with text when it is selected',
       (WidgetTester tester) async {
-    when(drawCubit.state).thenReturn(const DrawState.loaded(
-        ticketNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        ballNumbers: [1, 2, 3]));
-    when(drawCubit.stream).thenAnswer((_) => const Stream.empty());
     await tester.pumpWidget(
-      ScreenTestWrapper(
-        child: BlocProvider(
-          create: (context) => drawCubit,
-          child: const Scaffold(body: DrawBoardSectionCell(number: 1)),
-        ),
+      const ScreenTestWrapper(
+        child: Scaffold(
+            body: DrawBoardSectionCell(
+          number: 1,
+          isSelected: false,
+        )),
       ),
     );
+
+    await tester.pumpWidget(
+      const ScreenTestWrapper(
+        child: Scaffold(
+            body: DrawBoardSectionCell(
+          number: 1,
+          isSelected: true,
+        )),
+      ),
+    );
+
+    await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('1'), findsOneWidget);
   });
@@ -41,16 +36,9 @@ void main() {
   testWidgets(
       'Should render DrawBoardSectionCell without text when it is not selected',
       (WidgetTester tester) async {
-    when(drawCubit.state).thenReturn(const DrawState.loaded(
-        ticketNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-        ballNumbers: [1, 2, 3]));
-    when(drawCubit.stream).thenAnswer((_) => const Stream.empty());
     await tester.pumpWidget(
-      ScreenTestWrapper(
-        child: BlocProvider(
-          create: (context) => drawCubit,
-          child: const Scaffold(body: DrawBoardSectionCell(number: 4)),
-        ),
+      const ScreenTestWrapper(
+        child: Scaffold(body: DrawBoardSectionCell(number: 4)),
       ),
     );
 
