@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      routerConfig: goRouter,
+      routerConfig: goRouter(),
       title: 'MyDraw',
       theme: MyTheme.lightTheme,
       themeMode: ThemeMode.light,

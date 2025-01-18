@@ -7,8 +7,8 @@ import 'package:my_draw/core/constants/app_constants.dart';
 
 import '../draw_screen_constants.dart';
 
-part 'draw_state.dart';
 part 'draw_cubit.freezed.dart';
+part 'draw_state.dart';
 
 class DrawCubit extends Cubit<DrawState> {
   DrawCubit() : super(const DrawState.initial());
@@ -16,7 +16,7 @@ class DrawCubit extends Cubit<DrawState> {
 
   void loadTicketNumbers(List<int> numbers) {
     emit(DrawState.loaded(
-      ticketNumbers: [...numbers]..sort(),
+      ticketNumbers: [...numbers]..sort(), // copy and sort ticket numbers
       ballNumbers: [],
     ));
   }

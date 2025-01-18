@@ -43,11 +43,12 @@ class DrawBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<DrawCubit, DrawState>(
-      // when loaded ticket number, start to draw
       listenWhen: (previous, current) =>
           previous.maybeMap(initial: (_) => true, orElse: () => false) &&
           current.maybeMap(loaded: (_) => true, orElse: () => false),
-      listener: (context, state) => context.read<DrawCubit>().drawBalls(),
+      listener: (context, state) => context
+          .read<DrawCubit>()
+          .drawBalls(), // start to draw balls when state changes from initial to loaded
       child: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
