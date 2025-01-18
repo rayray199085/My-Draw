@@ -35,7 +35,7 @@ class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
     // Define size animation (grow and shrink)
     _sizeAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 100, end: 20).chain(
+        tween: Tween<double>(begin: 100, end: 0).chain(
           CurveTween(curve: Curves.easeIn),
         ),
         weight: 1,

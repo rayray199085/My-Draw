@@ -42,7 +42,20 @@ class DrawBoardHelper {
     return Offset(x, y);
   }
 
-  static double getGridCellWidth({required double maxWidth}) {
+  static double calculateGridSectionHeight({
+    required double maxWidth,
+    required int itemsCount,
+  }) {
+    final double cellWidth = _getGridCellWidth(maxWidth: maxWidth);
+    final cellHeight =
+        cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
+    final rowCount = itemsCount / DrawScreenConstants.boardCrossAxisCount;
+    final gridSectionHeight = cellHeight * rowCount +
+        (rowCount - 1) * DrawScreenConstants.boardMainAxisSpacing;
+    return gridSectionHeight;
+  }
+
+  static double _getGridCellWidth({required double maxWidth}) {
     final double gridWidth = maxWidth -
         DrawScreenConstants
             .drawBoardLabelWidth; // including the left margin to section label
@@ -51,15 +64,5 @@ class DrawBoardHelper {
                 DrawScreenConstants.boardCrossAxisSpacing) /
         DrawScreenConstants.boardCrossAxisCount;
     return cellWidth;
-  }
-
-  static double calculateGridSectionHeight({
-    required double cellHeight,
-    required int itemsCount,
-  }) {
-    final rowCount = itemsCount / DrawScreenConstants.boardCrossAxisCount;
-    final gridSectionHeight = cellHeight * rowCount +
-        (rowCount - 1) * DrawScreenConstants.boardMainAxisSpacing;
-    return gridSectionHeight;
   }
 }
