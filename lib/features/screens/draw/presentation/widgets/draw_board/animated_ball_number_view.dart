@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_draw/core/theme/cell_color_helper.dart';
 import 'package:my_draw/core/theme/radius_values.dart';
 import 'package:my_draw/features/screens/draw/presentation/utils/draw_board_helper.dart';
 
@@ -104,7 +105,8 @@ class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
           height: _heightAnimation.value,
           decoration: BoxDecoration(
             borderRadius: _borderRadiusAnimation.value,
-            color: Theme.of(context).colorScheme.tertiary,
+            color:
+                CellColorHelper.getCellBackgroundColor(number: widget.number),
           ),
           alignment: Alignment.center,
           child: Text(

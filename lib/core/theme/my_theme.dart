@@ -10,6 +10,7 @@ class MyTheme {
       onSecondary: Colors.white,
       secondaryContainer: Colors.black26,
       tertiary: Colors.red,
+      onTertiary: Color.fromARGB(255, 213, 224, 231),
     ),
     scaffoldBackgroundColor: Colors.white,
     useMaterial3: true,

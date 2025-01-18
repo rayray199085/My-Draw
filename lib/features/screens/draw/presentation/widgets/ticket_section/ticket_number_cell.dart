@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_draw/core/theme/cell_color_helper.dart';
 import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 
 import '../../../../../../core/theme/radius_values.dart';
@@ -22,15 +23,15 @@ class TicketNumberCell extends StatelessWidget {
           loaded: (loaded) => loaded.ballNumbers.contains(number),
           orElse: () => false),
       builder: (context, isSelected) {
+        final color = CellColorHelper.getCellBackgroundColor(number: number);
         return Container(
             width: _TicketNumberCellConstants.cellSize,
             height: _TicketNumberCellConstants.cellSize,
             decoration: BoxDecoration(
-                color:
-                    isSelected ? Theme.of(context).colorScheme.tertiary : null,
+                color: isSelected ? color : null,
                 borderRadius: BorderRadius.circular(RadiusValues.circular4),
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.tertiary,
+                  color: color,
                 )),
             alignment: Alignment.center,
             child: Text(

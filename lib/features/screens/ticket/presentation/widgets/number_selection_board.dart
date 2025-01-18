@@ -28,7 +28,7 @@ class NumberSelectionBoard extends StatelessWidget {
       itemBuilder: (context, index) {
         final number = index + 1; // starting from 1
         return NumberSelectionCell(
-          label: number.toString(),
+          number: number,
           isSelected: selectedNumbers.contains(number),
           onTap: () => context
               .read<TicketCubit>()

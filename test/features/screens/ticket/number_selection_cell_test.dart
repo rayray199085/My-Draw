@@ -13,7 +13,7 @@ void main() {
       ScreenTestWrapper(
         child: Scaffold(
             body: NumberSelectionCell(
-          label: '1',
+          number: 1,
           onTap: () => counter++,
         )),
       ),

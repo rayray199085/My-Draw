@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:my_draw/core/theme/cell_color_helper.dart';
 
 import '../../../../../core/theme/radius_values.dart';
 
 class NumberSelectionCell extends StatelessWidget {
   const NumberSelectionCell({
     super.key,
-    required this.label,
+    required this.number,
     this.isSelected = false,
     this.onTap,
   });
 
-  final String label;
+  final int number;
   final bool isSelected;
   final VoidCallback? onTap;
 
@@ -20,15 +21,18 @@ class NumberSelectionCell extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
-          color: isSelected ? Colors.red : Colors.black45,
+          color: isSelected
+              ? CellColorHelper.getCellBackgroundColor(number: number)
+              : Theme.of(context).colorScheme.onTertiary,
           borderRadius:
               const BorderRadius.all(Radius.circular(RadiusValues.circular4)),
         ),
         alignment: Alignment.center,
         child: Text(
-          label,
+          number.toString(),
           style: Theme.of(context).textTheme.labelMedium?.copyWith(
                 color: Theme.of(context).colorScheme.onSecondary,
+                fontWeight: FontWeight.bold,
               ),
         ),
       ),

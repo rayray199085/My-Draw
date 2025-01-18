@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_draw/core/theme/cell_color_helper.dart';
 
 import '../../../../../../core/theme/radius_values.dart';
 
@@ -93,8 +94,9 @@ class _DrawBoardSectionCellState extends State<DrawBoardSectionCell>
             child: Container(
               decoration: BoxDecoration(
                 color: _isSelected
-                    ? Theme.of(context).colorScheme.tertiary
-                    : Colors.black26,
+                    ? CellColorHelper.getCellBackgroundColor(
+                        number: widget.number)
+                    : Theme.of(context).colorScheme.onTertiary,
                 borderRadius: BorderRadius.circular(RadiusValues.circular4),
               ),
               alignment: Alignment.center,
