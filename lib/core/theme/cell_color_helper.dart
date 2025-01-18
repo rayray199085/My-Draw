@@ -14,9 +14,9 @@ class CellColorHelper {
       case var n when (n >= 41 && n <= 50):
         return Colors.purple;
       case var n when (n >= 51 && n <= 60):
-        return Colors.redAccent;
+        return Colors.pinkAccent;
       case var n when (n >= 61 && n <= 70):
-        return Colors.grey;
+        return Colors.brown;
       case var n when (n >= 71 && n <= 80):
         return Colors.deepPurple;
       default:

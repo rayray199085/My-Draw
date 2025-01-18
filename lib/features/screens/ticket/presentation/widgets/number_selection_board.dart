@@ -26,7 +26,7 @@ class NumberSelectionBoard extends StatelessWidget {
       ),
       itemCount: AppConstants.totalTicketNumber,
       itemBuilder: (context, index) {
-        final number = index + 1; // starting from 1
+        final number = index + 1; // number starts from 1
         return NumberSelectionCell(
           number: number,
           isSelected: selectedNumbers.contains(number),

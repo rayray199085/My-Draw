@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_draw/core/theme/cell_color_helper.dart';
+import 'package:my_draw/features/screens/draw/presentation/draw_screen_constants.dart';
 
 import '../../../../../../core/theme/radius_values.dart';
 
 class _DrawBoardSectionCellConstants {
-  static const int animationDelayInSeconds = 1;
   static const int animationDurationInMilliseconds = 300;
   static const double scaleFactorFrom = 1.0;
   static const double scaleFactorTo = 1.2;
@@ -71,7 +71,7 @@ class _DrawBoardSectionCellState extends State<DrawBoardSectionCell>
         widget.isSelected == true) {
       Future.delayed(
           const Duration(
-              seconds: _DrawBoardSectionCellConstants.animationDelayInSeconds),
+              seconds: DrawScreenConstants.positionAnimationDurationInSeconds),
           () {
         _animationController.forward();
         _isSelected = true;
@@ -82,6 +82,7 @@ class _DrawBoardSectionCellState extends State<DrawBoardSectionCell>
   @override
   Widget build(BuildContext context) {
     return OverflowBox(
+      // avoid scale animation get clipped
       maxHeight: double.infinity,
       maxWidth: double.infinity,
       child: AnimatedBuilder(

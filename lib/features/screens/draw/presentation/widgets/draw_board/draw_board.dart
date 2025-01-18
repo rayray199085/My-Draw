@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/features/screens/draw/presentation/utils/draw_board_helper.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/theme/gaps.dart';
-import '../../cubit/draw_cubit.dart';
 import '../../draw_screen_constants.dart';
 import 'draw_board_content.dart';
 import 'draw_board_header.dart';
 
 class DrawBoard extends StatelessWidget {
-  const DrawBoard({super.key});
+  const DrawBoard({
+    super.key,
+    required this.ballNumbers,
+  });
+  final List<int> ballNumbers;
 
   @override
   Widget build(BuildContext context) {
-    final sectionItemCount = AppConstants.totalTicketNumber ~/ 2;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final gridSectionHeight = DrawBoardHelper.calculateGridSectionHeight(
-            maxWidth: constraints.maxWidth, itemsCount: sectionItemCount);
+        final boardSectionHeight = DrawBoardHelper.calculateBoardSectionHeight(
+            maxWidth: constraints.maxWidth,
+            itemsCount: AppConstants.totalTicketNumber ~/ 2);
         final drawerHeaderLabelWidth =
             DrawScreenConstants.drawBoardLabelWidth + Gaps.spacing4;
         return Column(
@@ -29,19 +31,15 @@ class DrawBoard extends StatelessWidget {
                 left: drawerHeaderLabelWidth,
                 bottom: Gaps.spacing4,
               ),
-              child: DrawBoardHeader(labelWidth: gridSectionHeight),
+              child: DrawBoardHeader(
+                labelWidth: boardSectionHeight,
+                ballNumbers: ballNumbers,
+              ),
             ),
-            BlocSelector<DrawCubit, DrawState, int?>(
-              selector: (state) => state.maybeMap(
-                  loaded: (loaded) => loaded.ballNumbers.lastOrNull,
-                  orElse: () => null),
-              builder: (context, number) {
-                return DrawBoardContent(
-                  gridSectionHeight: gridSectionHeight,
-                  width: constraints.maxWidth,
-                  currentBallNumber: number,
-                );
-              },
+            DrawBoardContent(
+              boardSectionHeight: boardSectionHeight,
+              width: constraints.maxWidth,
+              ballNumbers: ballNumbers,
             ),
           ],
         );

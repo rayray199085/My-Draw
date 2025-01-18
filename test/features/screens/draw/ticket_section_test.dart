@@ -9,7 +9,6 @@ import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_sectio
 import 'package:my_draw/generated/l10n.dart';
 
 import '../../../utils/screen_test_wrapper.dart';
-
 import 'ticket_section_test.mocks.dart';
 
 @GenerateMocks([
@@ -33,7 +32,8 @@ void main() {
         child: BlocProvider(
           create: (context) => drawCubit,
           child: const Scaffold(
-              body: TicketSection(numbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])),
+              body: TicketSection(
+                  ticketNumbers: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10])),
         ),
       ),
     );

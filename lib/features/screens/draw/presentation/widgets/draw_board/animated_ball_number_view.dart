@@ -51,8 +51,8 @@ class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
     ).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
-    final cellWidth =
-        DrawBoardHelper.getGridCellWidth(maxWidth: widget.maxWidth);
+    final cellWidth = DrawBoardHelper.calculateBoardSectionCellWidth(
+        maxWidth: widget.maxWidth);
     final cellHeight =
         cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
 
@@ -81,7 +81,6 @@ class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
   @override
   void didUpdateWidget(covariant AnimatedBallNumberView oldWidget) {
     super.didUpdateWidget(oldWidget);
-
     if (widget.number != oldWidget.number) {
       _animationController.reset();
       _configureAnimations();

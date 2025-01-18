@@ -7,14 +7,15 @@ import '../../../../../../generated/l10n.dart';
 class TicketSection extends StatelessWidget {
   const TicketSection({
     super.key,
-    required this.numbers,
+    required this.ticketNumbers,
   });
 
-  final List<int> numbers;
+  final List<int> ticketNumbers;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: Gaps.spacing8,
       children: [
         Text(
           '${S.of(context).ticketNumbers}:',
@@ -23,12 +24,11 @@ class TicketSection extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
         ),
-        const SizedBox(height: Gaps.spacing8),
         Wrap(
           direction: Axis.horizontal,
           spacing: Gaps.spacing8,
           runSpacing: Gaps.spacing8,
-          children: numbers
+          children: ticketNumbers
               .map((number) => TicketNumberCell(number: number))
               .toList(),
         ),

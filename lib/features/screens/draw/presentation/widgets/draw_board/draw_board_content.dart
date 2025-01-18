@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 
-import '../../../../../../core/constants/app_constants.dart';
 import '../../draw_screen_constants.dart';
 import '../../enums/draw_board_section_type.dart';
 import '../../utils/draw_board_helper.dart';
@@ -12,14 +9,14 @@ import 'draw_board_section.dart';
 class DrawBoardContent extends StatefulWidget {
   const DrawBoardContent({
     super.key,
-    required this.gridSectionHeight,
+    required this.boardSectionHeight,
     required this.width,
-    required this.currentBallNumber,
+    required this.ballNumbers,
   });
 
-  final double gridSectionHeight;
+  final double boardSectionHeight;
   final double width;
-  final int? currentBallNumber;
+  final List<int> ballNumbers;
 
   @override
   State<DrawBoardContent> createState() => _DrawBoardContentState();
@@ -33,7 +30,6 @@ class _DrawBoardContentState extends State<DrawBoardContent>
   @override
   void initState() {
     super.initState();
-
     _animationController = AnimationController(
       duration: const Duration(
           seconds: DrawScreenConstants.positionAnimationDurationInSeconds),
@@ -44,24 +40,27 @@ class _DrawBoardContentState extends State<DrawBoardContent>
     _animationController.forward();
   }
 
+  int? get _currentBallNumber => widget.ballNumbers.lastOrNull;
+
   void _configureAnimations() {
-    final startingPoint = DrawBoardHelper.getAnimationStartingPosition(
-        maxWidth: widget.width, gridViewHeight: _gridViewHeight);
+    final startPosition =
+        DrawBoardHelper.calculateAnimatedBallNumberViewStartPosition(
+            maxWidth: widget.width, gridViewHeight: _gridViewHeight);
     final double cellWidth =
-        DrawBoardHelper.getGridCellWidth(maxWidth: widget.width);
+        DrawBoardHelper.calculateBoardSectionCellWidth(maxWidth: widget.width);
     final cellHeight =
         cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
-    final targetPoint = widget.currentBallNumber != null
-        ? DrawBoardHelper.getAnimationTargetPosition(
-            number: widget.currentBallNumber!,
-            gridSectionHeight: widget.gridSectionHeight,
+    final endPosition = _currentBallNumber != null
+        ? DrawBoardHelper.calculateAnimatedBallNumberViewEndPosition(
+            number: _currentBallNumber!,
+            gridSectionHeight: widget.boardSectionHeight,
             cellWidth: cellWidth,
             cellHeight: cellHeight,
           )
-        : startingPoint;
+        : startPosition;
     _positionAnimation = Tween<Offset>(
-      begin: startingPoint, // Starting position
-      end: targetPoint, // Ending position
+      begin: startPosition, // Starting position
+      end: endPosition, // Ending position
     ).animate(CurvedAnimation(
       parent: _animationController,
       curve: Curves.fastOutSlowIn,
@@ -81,63 +80,50 @@ class _DrawBoardContentState extends State<DrawBoardContent>
   }
 
   double get _gridViewHeight =>
-      widget.gridSectionHeight * 2 +
+      widget.boardSectionHeight * 2 +
       DrawScreenConstants.boardSectionVerticalGap;
 
   @override
   void didUpdateWidget(covariant DrawBoardContent oldWidget) {
     super.didUpdateWidget(oldWidget);
-
-    if (oldWidget.currentBallNumber != widget.currentBallNumber &&
-        widget.currentBallNumber != null) {
+    if (oldWidget.ballNumbers.lastOrNull != _currentBallNumber &&
+        _currentBallNumber != null) {
       _startAnimation();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final sectionItemCount = AppConstants.totalTicketNumber ~/
-        2; // each section has half of the total numbers
     return SizedBox(
       height: _gridViewHeight,
       child: Stack(
         children: [
-          BlocSelector<DrawCubit, DrawState, List<int>>(
-            selector: (state) => state.maybeMap(
-                loaded: (loaded) => loaded.ballNumbers, orElse: () => []),
-            builder: (context, ballNumbers) {
-              return Column(
-                spacing: DrawScreenConstants.boardSectionVerticalGap,
-                children: [
-                  DrawBoardSection(
-                    startingIndex: 0,
-                    itemsCount: sectionItemCount,
-                    sectionType: DrawBoardSectionType.heads,
-                    height: widget.gridSectionHeight,
-                    ballNumbers: ballNumbers,
-                  ),
-                  DrawBoardSection(
-                    startingIndex: sectionItemCount,
-                    itemsCount: sectionItemCount,
-                    sectionType: DrawBoardSectionType.tails,
-                    height: widget.gridSectionHeight,
-                    ballNumbers: ballNumbers,
-                  )
-                ],
-              );
-            },
+          Column(
+            spacing: DrawScreenConstants.boardSectionVerticalGap,
+            children: [
+              DrawBoardSection(
+                sectionType: DrawBoardSectionType.heads,
+                height: widget.boardSectionHeight,
+                ballNumbers: widget.ballNumbers,
+              ),
+              DrawBoardSection(
+                sectionType: DrawBoardSectionType.tails,
+                height: widget.boardSectionHeight,
+                ballNumbers: widget.ballNumbers,
+              )
+            ],
           ),
-          if (widget.currentBallNumber != null)
+          if (_currentBallNumber != null)
             AnimatedBuilder(
               animation: _positionAnimation,
               builder: (context, child) {
                 return Positioned(
-                    left: _positionAnimation.value.dx, // X position
+                    left: _positionAnimation.value.dx,
                     top: _positionAnimation.value.dy,
                     child: child!);
               },
               child: AnimatedBallNumberView(
-                number: widget.currentBallNumber!,
+                number: _currentBallNumber!,
                 maxWidth: widget.width,
               ),
             )

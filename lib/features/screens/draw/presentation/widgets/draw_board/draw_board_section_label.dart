@@ -24,7 +24,7 @@ class DrawBoardSectionLabel extends StatelessWidget {
       ),
       alignment: Alignment.center,
       child: RotatedBox(
-        quarterTurns: -1,
+        quarterTurns: -1, // rotate -90 degree
         child: Text(
           text,
           style: Theme.of(context).textTheme.labelSmall?.copyWith(

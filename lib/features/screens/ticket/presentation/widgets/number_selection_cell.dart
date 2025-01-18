@@ -17,23 +17,26 @@ class NumberSelectionCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const borderRadius =
+        BorderRadius.all(Radius.circular(RadiusValues.circular4));
     return InkWell(
+      borderRadius: borderRadius,
       onTap: onTap,
-      child: Container(
+      child: Ink(
         decoration: BoxDecoration(
           color: isSelected
               ? CellColorHelper.getCellBackgroundColor(number: number)
               : Theme.of(context).colorScheme.onTertiary,
-          borderRadius:
-              const BorderRadius.all(Radius.circular(RadiusValues.circular4)),
+          borderRadius: borderRadius,
         ),
-        alignment: Alignment.center,
-        child: Text(
-          number.toString(),
-          style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                color: Theme.of(context).colorScheme.onSecondary,
-                fontWeight: FontWeight.bold,
-              ),
+        child: Align(
+          child: Text(
+            number.toString(),
+            style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  color: Theme.of(context).colorScheme.onSecondary,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
         ),
       ),
     );

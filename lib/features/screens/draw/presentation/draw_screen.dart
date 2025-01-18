@@ -42,36 +42,35 @@ class DrawBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<DrawCubit, DrawState>(
+    return BlocConsumer<DrawCubit, DrawState>(
       listenWhen: (previous, current) =>
           previous.maybeMap(initial: (_) => true, orElse: () => false) &&
           current.maybeMap(loaded: (_) => true, orElse: () => false),
       listener: (context, state) => context
           .read<DrawCubit>()
           .drawBalls(), // start to draw balls when state changes from initial to loaded
-      child: SafeArea(
-          child: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(Gaps.spacing16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              BlocSelector<DrawCubit, DrawState, List<int>?>(
-                selector: (state) => state.maybeMap(
-                    loaded: (loaded) => loaded.ticketNumbers,
-                    orElse: () => null),
-                builder: (context, ticketNumbers) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: Gaps.spacing16),
-                    child: TicketSection(numbers: ticketNumbers ?? []),
-                  );
-                },
-              ),
-              const DrawBoard(),
-            ],
+      builder: (context, state) {
+        return SafeArea(
+            child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(Gaps.spacing16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: Gaps.spacing16,
+              children: [
+                TicketSection(
+                    ticketNumbers: state.maybeMap(
+                        loaded: (loaded) => loaded.ticketNumbers,
+                        orElse: () => [])),
+                DrawBoard(
+                    ballNumbers: state.maybeMap(
+                        loaded: (loaded) => loaded.ballNumbers,
+                        orElse: () => [])),
+              ],
+            ),
           ),
-        ),
-      )),
+        ));
+      },
     );
   }
 }

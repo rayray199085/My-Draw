@@ -22,11 +22,12 @@ class DrawCubit extends Cubit<DrawState> {
   }
 
   void drawBalls() {
-    final List<int> ballNumbers =
-        List.generate(AppConstants.totalTicketNumber, (index) => index + 1);
+    final List<int> ballNumbers = List.generate(AppConstants.totalTicketNumber,
+        (index) => index + 1); // generate a number list from 1 to 80
     final random = Random();
     _timer = Timer.periodic(
         const Duration(seconds: DrawScreenConstants.drawBallInterval), (t) {
+      // remove a random index item from the list every two seconds
       state.maybeMap(
           loaded: (loaded) {
             if (loaded.ballNumbers.length < DrawScreenConstants.maxBallCount) {

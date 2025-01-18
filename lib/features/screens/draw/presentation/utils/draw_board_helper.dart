@@ -5,8 +5,8 @@ import '../../../../../core/theme/gaps.dart';
 import '../draw_screen_constants.dart';
 
 class DrawBoardHelper {
-  /// At the beginning, animated ball number view is shown at the center of the board
-  static Offset getAnimationStartingPosition(
+  /// AnimatedBallNumberView is shown at the center of the board
+  static Offset calculateAnimatedBallNumberViewStartPosition(
       {required double maxWidth, required double gridViewHeight}) {
     final x = (maxWidth - DrawScreenConstants.animatedBallNumberWidth) / 2.0;
     final y =
@@ -14,8 +14,8 @@ class DrawBoardHelper {
     return Offset(x, y);
   }
 
-  /// Calculate the target position animated ball number view will move to
-  static Offset getAnimationTargetPosition({
+  /// Calculate the target position animated AnimatedBallNumberView moves to
+  static Offset calculateAnimatedBallNumberViewEndPosition({
     required int number,
     required double gridSectionHeight,
     required double cellWidth,
@@ -42,12 +42,12 @@ class DrawBoardHelper {
     return Offset(x, y);
   }
 
-  /// Calculate draw board grid section height
-  static double calculateGridSectionHeight({
+  /// Calculate DrawBoardSection height
+  static double calculateBoardSectionHeight({
     required double maxWidth,
     required int itemsCount,
   }) {
-    final double cellWidth = getGridCellWidth(maxWidth: maxWidth);
+    final double cellWidth = calculateBoardSectionCellWidth(maxWidth: maxWidth);
     final cellHeight =
         cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
     final rowCount = itemsCount / DrawScreenConstants.boardCrossAxisCount;
@@ -56,12 +56,12 @@ class DrawBoardHelper {
     return gridSectionHeight;
   }
 
-  /// Calculate draw board grid section cell width
-  static double getGridCellWidth({required double maxWidth}) {
-    final double gridWidth = maxWidth -
+  /// Calculate DrawBoardSectionCell width
+  static double calculateBoardSectionCellWidth({required double maxWidth}) {
+    final double sectionWidth = maxWidth -
         DrawScreenConstants
             .drawBoardLabelWidth; // including the left margin to section label
-    final double cellWidth = (gridWidth -
+    final double cellWidth = (sectionWidth -
             DrawScreenConstants.boardCrossAxisCount *
                 DrawScreenConstants.boardCrossAxisSpacing) /
         DrawScreenConstants.boardCrossAxisCount;

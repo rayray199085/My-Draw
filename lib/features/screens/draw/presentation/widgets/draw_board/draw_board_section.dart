@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_draw/core/constants/app_constants.dart';
 import 'package:my_draw/features/screens/draw/presentation/utils/draw_board_section_color.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/draw_board_section_label.dart';
 
 import '../../../../../../core/theme/gaps.dart';
-import '../../../../../../generated/l10n.dart';
 import '../../draw_screen_constants.dart';
 import '../../enums/draw_board_section_type.dart';
 import 'draw_board_section_cell.dart';
@@ -11,15 +11,11 @@ import 'draw_board_section_cell.dart';
 class DrawBoardSection extends StatelessWidget {
   const DrawBoardSection({
     super.key,
-    this.startingIndex = 0,
-    required this.itemsCount,
     required this.sectionType,
     required this.height,
     required this.ballNumbers,
   });
 
-  final int startingIndex;
-  final int itemsCount;
   final DrawBoardSectionType sectionType;
   final double height;
   final List<int> ballNumbers;
@@ -32,7 +28,7 @@ class DrawBoardSection extends StatelessWidget {
             height: height,
             width: DrawScreenConstants.drawBoardLabelWidth,
             child: DrawBoardSectionLabel(
-              text: _sectionLabel,
+              text: sectionType.label,
               backgroundColor: getDrawBoardSectionPrimaryColor(
                   context: context, type: sectionType),
             )),
@@ -48,10 +44,11 @@ class DrawBoardSection extends StatelessWidget {
               childAspectRatio:
                   DrawScreenConstants.drawBoardGridCellAspectRatio,
             ),
-            itemCount: itemsCount,
-            itemBuilder: (context, index) {
-              final cellNumber =
-                  startingIndex + index + 1; // number = index + 1
+            itemCount: AppConstants.totalTicketNumber ~/ 2,
+            itemBuilder: (context, sectionIndex) {
+              final cellNumber = sectionType.startIndex +
+                  sectionIndex +
+                  1; // top section: start index is 0; bottom section: start index is 40
               return DrawBoardSectionCell(
                 number: cellNumber,
                 isSelected: ballNumbers.contains(cellNumber),
@@ -61,14 +58,5 @@ class DrawBoardSection extends StatelessWidget {
         ),
       ],
     );
-  }
-
-  String get _sectionLabel {
-    switch (sectionType) {
-      case DrawBoardSectionType.heads:
-        return S.current.heads;
-      case DrawBoardSectionType.tails:
-        return S.current.tails;
-    }
   }
 }
