@@ -39,7 +39,7 @@ class DrawBoard extends StatelessWidget {
                 return DrawBoardContent(
                   gridSectionHeight: gridSectionHeight,
                   width: constraints.maxWidth,
-                  number: number,
+                  currentBallNumber: number,
                 );
               },
             ),

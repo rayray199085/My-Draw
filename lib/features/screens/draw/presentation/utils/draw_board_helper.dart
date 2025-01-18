@@ -32,13 +32,9 @@ class DrawBoardHelper {
     int row = ((number - 1) / DrawScreenConstants.boardCrossAxisCount).floor();
     row -= isInTails ? sectionRowCount : 0;
     y += row * (cellHeight + DrawScreenConstants.boardMainAxisSpacing);
-    y += cellHeight / 2.0; // vertical offset to center
-    y -= DrawScreenConstants.animatedBallNumberHeight / 2.0;
 
     int col = (number - 1) % DrawScreenConstants.boardCrossAxisCount;
     x += col * (cellWidth + DrawScreenConstants.boardCrossAxisSpacing);
-    x += cellWidth / 2.0; // horizontal offset to center
-    x -= DrawScreenConstants.animatedBallNumberWidth / 2.0;
     return Offset(x, y);
   }
 

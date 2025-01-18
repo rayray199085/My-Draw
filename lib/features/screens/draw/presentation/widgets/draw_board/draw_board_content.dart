@@ -6,7 +6,7 @@ import '../../../../../../core/constants/app_constants.dart';
 import '../../draw_screen_constants.dart';
 import '../../enums/draw_board_section_type.dart';
 import '../../utils/draw_board_helper.dart';
-import '../animated_ball_number_view.dart';
+import 'animated_ball_number_view.dart';
 import 'draw_board_section.dart';
 
 class DrawBoardContent extends StatefulWidget {
@@ -14,12 +14,12 @@ class DrawBoardContent extends StatefulWidget {
     super.key,
     required this.gridSectionHeight,
     required this.width,
-    required this.number,
+    required this.currentBallNumber,
   });
 
   final double gridSectionHeight;
   final double width;
-  final int? number;
+  final int? currentBallNumber;
 
   @override
   State<DrawBoardContent> createState() => _DrawBoardContentState();
@@ -51,9 +51,9 @@ class _DrawBoardContentState extends State<DrawBoardContent>
         DrawBoardHelper.getGridCellWidth(maxWidth: widget.width);
     final cellHeight =
         cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
-    final targetPoint = widget.number != null
+    final targetPoint = widget.currentBallNumber != null
         ? DrawBoardHelper.getAnimationTargetPosition(
-            number: widget.number!,
+            number: widget.currentBallNumber!,
             gridSectionHeight: widget.gridSectionHeight,
             cellWidth: cellWidth,
             cellHeight: cellHeight,
@@ -88,7 +88,8 @@ class _DrawBoardContentState extends State<DrawBoardContent>
   void didUpdateWidget(covariant DrawBoardContent oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (oldWidget.number != widget.number && widget.number != null) {
+    if (oldWidget.currentBallNumber != widget.currentBallNumber &&
+        widget.currentBallNumber != null) {
       _startAnimation();
     }
   }
@@ -126,7 +127,7 @@ class _DrawBoardContentState extends State<DrawBoardContent>
               );
             },
           ),
-          if (widget.number != null)
+          if (widget.currentBallNumber != null)
             AnimatedBuilder(
               animation: _positionAnimation,
               builder: (context, child) {
@@ -135,7 +136,10 @@ class _DrawBoardContentState extends State<DrawBoardContent>
                     top: _positionAnimation.value.dy,
                     child: child!);
               },
-              child: AnimatedBallNumberView(number: widget.number!),
+              child: AnimatedBallNumberView(
+                number: widget.currentBallNumber!,
+                maxWidth: widget.width,
+              ),
             )
         ],
       ),

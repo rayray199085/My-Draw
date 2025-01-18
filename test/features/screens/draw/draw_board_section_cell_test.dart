@@ -28,7 +28,7 @@ void main() {
       ),
     );
 
-    await tester.pump(const Duration(milliseconds: 500));
+    await tester.pump(const Duration(seconds: 1));
 
     expect(find.text('1'), findsOneWidget);
   });

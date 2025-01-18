@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../../../core/theme/radius_values.dart';
 
 class _DrawBoardSectionCellConstants {
-  static const int animationDelayInMilliseconds = 500;
+  static const int animationDelayInSeconds = 1;
   static const int animationDurationInMilliseconds = 300;
   static const double scaleFactorFrom = 1.0;
   static const double scaleFactorTo = 1.2;
@@ -70,8 +70,8 @@ class _DrawBoardSectionCellState extends State<DrawBoardSectionCell>
         widget.isSelected == true) {
       Future.delayed(
           const Duration(
-              milliseconds: _DrawBoardSectionCellConstants
-                  .animationDelayInMilliseconds), () {
+              seconds: _DrawBoardSectionCellConstants.animationDelayInSeconds),
+          () {
         _animationController.forward();
         _isSelected = true;
       });
