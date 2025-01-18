@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../draw_screen_constants.dart';
+
 class AnimatedBallNumberView extends StatefulWidget {
   final int number;
 
@@ -14,65 +16,61 @@ class AnimatedBallNumberView extends StatefulWidget {
 
 class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _sizeAnimation;
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
-      duration: const Duration(seconds: 1), // Total duration for the animation
+    _animationController = AnimationController(
+      duration: const Duration(
+          seconds: DrawScreenConstants.scaleAnimationDurationInSeconds),
       vsync: this,
     );
 
-    _initializeAnimations();
+    _configureAnimations();
 
-    _controller.forward(); // Start the animation initially
+    _animationController.forward();
   }
 
-  void _initializeAnimations() {
-    // Define size animation (grow and shrink)
-    _sizeAnimation = TweenSequence<double>([
-      TweenSequenceItem(
-        tween: Tween<double>(begin: 100, end: 0).chain(
-          CurveTween(curve: Curves.easeIn),
-        ),
-        weight: 1,
-      ),
-    ]).animate(_controller);
+  void _configureAnimations() {
+    _scaleAnimation =
+        Tween<double>(begin: 1.0, end: 0.0).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.fastOutSlowIn,
+    ));
   }
 
   @override
   void didUpdateWidget(covariant AnimatedBallNumberView oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    // Restart the animation when the number or target position changes
     if (widget.number != oldWidget.number) {
-      _controller.reset();
-      _initializeAnimations(); // Reinitialize position animation
-      _controller.forward();
+      _animationController.reset();
+      _configureAnimations();
+      _animationController.forward();
     }
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-      animation: _controller,
+      animation: _animationController,
       builder: (context, child) {
         return Center(
           child: Transform.scale(
-            scale: _sizeAnimation.value / 100,
+            scale: _scaleAnimation.value,
             alignment: Alignment.center,
             child: Container(
-              width: 100.0,
-              height: 100.0,
+              width: DrawScreenConstants.animatedBallNumberWidth,
+              height: DrawScreenConstants.animatedBallNumberHeight,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Theme.of(context).colorScheme.tertiary,

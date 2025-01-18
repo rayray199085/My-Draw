@@ -46,7 +46,7 @@ class DrawBoardHelper {
     required double maxWidth,
     required int itemsCount,
   }) {
-    final double cellWidth = _getGridCellWidth(maxWidth: maxWidth);
+    final double cellWidth = getGridCellWidth(maxWidth: maxWidth);
     final cellHeight =
         cellWidth / DrawScreenConstants.drawBoardGridCellAspectRatio;
     final rowCount = itemsCount / DrawScreenConstants.boardCrossAxisCount;
@@ -55,7 +55,7 @@ class DrawBoardHelper {
     return gridSectionHeight;
   }
 
-  static double _getGridCellWidth({required double maxWidth}) {
+  static double getGridCellWidth({required double maxWidth}) {
     final double gridWidth = maxWidth -
         DrawScreenConstants
             .drawBoardLabelWidth; // including the left margin to section label

@@ -10,4 +10,6 @@ class DrawScreenConstants {
   static const double drawBoardLabelWidth = 24.0;
   static const double drawBoardGridCellAspectRatio = 3 / 2;
   static const int maxBallCount = 20;
+  static const int positionAnimationDurationInSeconds = 1;
+  static const int scaleAnimationDurationInSeconds = 1;
 }

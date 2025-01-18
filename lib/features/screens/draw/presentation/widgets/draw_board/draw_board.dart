@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_draw/features/screens/draw/presentation/utils/draw_board_helper.dart';
 
 import '../../../../../../core/constants/app_constants.dart';
 import '../../../../../../core/theme/gaps.dart';
+import '../../cubit/draw_cubit.dart';
 import '../../draw_screen_constants.dart';
 import 'draw_board_content.dart';
 import 'draw_board_header.dart';
@@ -29,9 +31,17 @@ class DrawBoard extends StatelessWidget {
               ),
               child: DrawBoardHeader(labelWidth: gridSectionHeight),
             ),
-            DrawBoardContent(
-              gridSectionHeight: gridSectionHeight,
-              width: constraints.maxWidth,
+            BlocSelector<DrawCubit, DrawState, int?>(
+              selector: (state) => state.maybeMap(
+                  loaded: (loaded) => loaded.ballNumbers.lastOrNull,
+                  orElse: () => null),
+              builder: (context, number) {
+                return DrawBoardContent(
+                  gridSectionHeight: gridSectionHeight,
+                  width: constraints.maxWidth,
+                  number: number,
+                );
+              },
             ),
           ],
         );
