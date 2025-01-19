@@ -14,7 +14,6 @@ class MyTheme {
     ),
     scaffoldBackgroundColor: Colors.white,
     useMaterial3: true,
-    // splashColor: Colors.transparent,
     highlightColor: Colors.transparent,
     appBarTheme: const AppBarTheme(
       centerTitle: true,

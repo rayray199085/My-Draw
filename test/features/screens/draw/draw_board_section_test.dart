@@ -5,14 +5,14 @@ import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/dr
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/draw_board_section_cell.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/draw_board/draw_board_section_label.dart';
 
-import '../../../utils/screen_test_wrapper.dart';
+import '../../../utils/test_wrapper.dart';
 
 void main() {
   testWidgets(
       'Should render DrawBoardSection with a DrawBoardSectionLabel and 40 DrawBoardSectionCell',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const ScreenTestWrapper(
+      const TestWrapper(
         child: Scaffold(
             body: DrawBoardSection(
           sectionType: DrawBoardSectionType.heads,

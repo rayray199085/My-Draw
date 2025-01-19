@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:my_draw/features/screens/ticket/presentation/widgets/icon_text_button.dart';
 
-import '../../../utils/screen_test_wrapper.dart';
+import '../../../utils/test_wrapper.dart';
 
 void main() {
   testWidgets('Should render IconTextButton with an icon and a text',
       (WidgetTester tester) async {
     int counter = 0;
     await tester.pumpWidget(
-      ScreenTestWrapper(
+      TestWrapper(
         child: Scaffold(
             body: IconTextButton(
           icon: Icons.clear,

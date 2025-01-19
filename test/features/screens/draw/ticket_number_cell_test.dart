@@ -6,8 +6,7 @@ import 'package:mockito/mockito.dart';
 import 'package:my_draw/features/screens/draw/presentation/cubit/draw_cubit.dart';
 import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section/ticket_number_cell.dart';
 
-import '../../../utils/screen_test_wrapper.dart';
-
+import '../../../utils/test_wrapper.dart';
 import 'ticket_number_cell_test.mocks.dart';
 
 @GenerateMocks([
@@ -26,7 +25,7 @@ void main() {
         ballNumbers: [1, 2, 3]));
     when(drawCubit.stream).thenAnswer((_) => const Stream.empty());
     await tester.pumpWidget(
-      ScreenTestWrapper(
+      TestWrapper(
         child: BlocProvider(
           create: (context) => drawCubit,
           child: const Scaffold(

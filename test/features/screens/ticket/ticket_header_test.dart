@@ -5,13 +5,13 @@ import 'package:my_draw/features/screens/ticket/presentation/widgets/icon_text_b
 import 'package:my_draw/features/screens/ticket/presentation/widgets/ticket_header.dart';
 import 'package:my_draw/generated/l10n.dart';
 
-import '../../../utils/screen_test_wrapper.dart';
+import '../../../utils/test_wrapper.dart';
 
 void main() {
   testWidgets('Should render TicketHeader with 2 IconTextButton',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      const ScreenTestWrapper(
+      const TestWrapper(
         child: Scaffold(body: TicketHeader()),
       ),
     );
@@ -27,7 +27,7 @@ void main() {
       'Should render TicketHeader with 2 IconTextButton when one number remaining',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      ScreenTestWrapper(
+      TestWrapper(
         child: Scaffold(
             body: TicketHeader(
           numberCount: TicketScreenConstants.maxSelectedNumber - 1,
@@ -43,7 +43,7 @@ void main() {
       'Should render TicketHeader with 2 IconTextButton when max number being selected',
       (WidgetTester tester) async {
     await tester.pumpWidget(
-      ScreenTestWrapper(
+      TestWrapper(
         child: Scaffold(
             body: TicketHeader(
           numberCount: TicketScreenConstants.maxSelectedNumber,

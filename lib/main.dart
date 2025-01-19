@@ -7,7 +7,6 @@ import 'app.dart';
 
 void main() {
   runZonedGuarded(() async {
-    WidgetsFlutterBinding.ensureInitialized();
     runApp(const MyApp());
   }, (error, stack) {
     log(error.toString(), stackTrace: stack);

@@ -12,7 +12,7 @@ import 'package:my_draw/features/screens/ticket/presentation/widgets/number_sele
 import 'package:my_draw/features/screens/ticket/presentation/widgets/ticket_header.dart';
 import 'package:my_draw/generated/l10n.dart';
 
-import '../../../utils/screen_test_wrapper.dart';
+import '../../../utils/test_wrapper.dart';
 import 'ticket_screen_test.mocks.dart';
 
 @GenerateMocks([
@@ -31,7 +31,7 @@ void main() {
         .thenReturn(const TicketState(selectedNumbers: [1, 2, 3, 4, 5]));
     when(ticketCubit.stream).thenAnswer((_) => const Stream.empty());
     await tester.pumpWidget(
-      ScreenTestWrapper(
+      TestWrapper(
         child: BlocProvider(
           create: (context) => ticketCubit,
           child: const TicketScreen(),
@@ -50,7 +50,7 @@ void main() {
         .thenReturn(const TicketState(selectedNumbers: [1, 2, 3, 4, 5]));
     when(ticketCubit.stream).thenAnswer((_) => const Stream.empty());
     await tester.pumpWidget(
-      ScreenTestWrapper(
+      TestWrapper(
         child: BlocProvider(
           create: (context) => ticketCubit,
           child: const Scaffold(body: TicketBody()),

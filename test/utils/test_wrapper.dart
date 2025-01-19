@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:my_draw/generated/l10n.dart';
 
-class ScreenTestWrapper extends StatelessWidget {
-  const ScreenTestWrapper({
+class TestWrapper extends StatelessWidget {
+  const TestWrapper({
     super.key,
     required this.child,
   });

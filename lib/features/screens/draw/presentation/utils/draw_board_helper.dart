@@ -25,7 +25,7 @@ class DrawBoardHelper {
         2; // each section has half ticket numbers
     final sectionRowCount =
         sectionCellCount ~/ DrawScreenConstants.boardCrossAxisCount;
-    final isInTails = number > AppConstants.totalTicketNumber ~/ 2;
+    final isInTails = number > sectionCellCount;
 
     double x = DrawScreenConstants.drawBoardLabelWidth +
         Gaps.spacing4; // initial left position

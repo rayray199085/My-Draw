@@ -8,7 +8,7 @@ import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_sectio
 import 'package:my_draw/features/screens/draw/presentation/widgets/ticket_section/ticket_section.dart';
 import 'package:my_draw/generated/l10n.dart';
 
-import '../../../utils/screen_test_wrapper.dart';
+import '../../../utils/test_wrapper.dart';
 import 'ticket_section_test.mocks.dart';
 
 @GenerateMocks([
@@ -28,7 +28,7 @@ void main() {
         ballNumbers: [1, 2, 3]));
     when(drawCubit.stream).thenAnswer((_) => const Stream.empty());
     await tester.pumpWidget(
-      ScreenTestWrapper(
+      TestWrapper(
         child: BlocProvider(
           create: (context) => drawCubit,
           child: const Scaffold(
