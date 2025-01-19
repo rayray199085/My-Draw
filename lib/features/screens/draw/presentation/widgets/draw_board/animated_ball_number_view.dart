@@ -49,7 +49,8 @@ class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
           DrawScreenConstants.animatedBallNumberWidth / 2.0),
       end: BorderRadius.circular(RadiusValues.circular4),
     ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+      CurvedAnimation(
+          parent: _animationController, curve: Curves.fastOutSlowIn),
     );
     final cellWidth = DrawBoardHelper.calculateBoardSectionCellWidth(
         maxWidth: widget.maxWidth);
@@ -60,21 +61,24 @@ class _AnimatedBallNumberViewState extends State<AnimatedBallNumberView>
       begin: DrawScreenConstants.animatedBallNumberWidth,
       end: cellWidth,
     ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+      CurvedAnimation(
+          parent: _animationController, curve: Curves.fastOutSlowIn),
     );
 
     _heightAnimation = Tween<double>(
       begin: DrawScreenConstants.animatedBallNumberHeight,
       end: cellHeight,
     ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+      CurvedAnimation(
+          parent: _animationController, curve: Curves.fastOutSlowIn),
     );
 
     _textScaleAnimation = Tween<double>(
       begin: 1.0,
       end: _textScaleEndValue,
     ).animate(
-      CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
+      CurvedAnimation(
+          parent: _animationController, curve: Curves.fastOutSlowIn),
     );
   }
 
